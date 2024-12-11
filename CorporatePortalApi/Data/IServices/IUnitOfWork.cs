@@ -2,7 +2,7 @@
 {
     public interface IUnitOfWork
     {
-       // IAspNetUserService AspNetUserService { get; }
+        IAspNetUserService AspNetUserService { get; }
         Task<bool> SaveAsync();
     }
 }

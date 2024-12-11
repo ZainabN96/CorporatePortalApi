@@ -1,6 +1,6 @@
 ﻿namespace CorporatePortalApi.Models
 {
-    public class TMX_Tenants
+    public class TmX_Location
     {
     }
 }

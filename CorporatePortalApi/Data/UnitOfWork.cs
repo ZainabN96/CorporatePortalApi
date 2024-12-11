@@ -13,7 +13,7 @@ namespace CorporatePortalApi
         {
             this.dc = dc;
         }
-        //public IAspNetUserService AspNetUserService => new AspNetUserService(dc);
+        public IAspNetUserService AspNetUserService => new AspNetUserService(dc);
         public async Task<bool> SaveAsync()
         {
             try

@@ -9,7 +9,7 @@ namespace CorporatePortalApi.Helper
 {
     public class UHelper
     {
-        public static string CreateJWT(User user, IConfiguration configuration)
+        /*public static string CreateJWT(User user, IConfiguration configuration)
         {
             var secretKey = configuration.GetSection("AppSettings:Key").Value;
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
@@ -32,7 +32,7 @@ namespace CorporatePortalApi.Helper
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
-        }
+        }*/
 
         public static string ExtractIdentifierFromUrl(string url)
         {

@@ -2,7 +2,6 @@
 
 namespace CorporatePortalApi.Models
 {
-    
     public class AspNetUser
     {
         [Key]
@@ -47,7 +46,7 @@ namespace CorporatePortalApi.Models
         public virtual TMX_Time_Zone TimeZone { get; set; }
 
         public int? Tenant_ID { get; set; }
-        public virtual TMX_Tenants Tenant { get; set; }
+        public virtual TMX_Tenant Tenant { get; set; }
 
         [Required]
         public DateTime RegistrationDate { get; set; }
