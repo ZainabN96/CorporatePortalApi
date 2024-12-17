@@ -1,7 +1,6 @@
 ﻿using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Data.Services;
 using CorporatePortalApi.Data;
-using System.Security;
 
 namespace CorporatePortalApi
 {
@@ -14,6 +13,7 @@ namespace CorporatePortalApi
             this.dc = dc;
         }
         public IAspNetUserService AspNetUserService => new AspNetUserService(dc);
+        public ITmX_CorporateService TmX_CorporateService => new TmX_CorporateService(dc);
         public async Task<bool> SaveAsync()
         {
             try

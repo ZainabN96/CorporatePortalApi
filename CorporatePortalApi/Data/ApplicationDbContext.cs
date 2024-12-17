@@ -11,6 +11,7 @@ namespace CorporatePortalApi.Data
             : base(options)
         {
         }
+        public DbSet<TmX_Corporate> TmX_Corporate { get; set; }
         public DbSet<TmX_Address_Geography> TmX_Address_Geography { get; set; }
         public DbSet<TmX_Lookup> TmX_Lookup { get; set; }
         public DbSet<TMX_Tenant> TMX_Tenants { get; set; }
