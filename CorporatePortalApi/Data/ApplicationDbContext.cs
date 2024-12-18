@@ -18,8 +18,10 @@ namespace CorporatePortalApi.Data
         public DbSet<TMX_Address> TMX_Address { get; set; }
         public DbSet<TMX_Locale> TMX_Locale { get; set; }
         public DbSet<TMX_Time_Zone> TMX_Time_Zone { get; set; }
-        public DbSet<AspNetUser> AspNetUsers { get; set; }*/
+        public DbSet<AspNetUser> AspNetUsers { get; set; }
         
+        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
