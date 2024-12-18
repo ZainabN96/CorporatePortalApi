@@ -45,47 +45,51 @@ namespace CorporatePortalApi.Controllers.Api
         }
 
         [HttpPost("addOrganization")]
-        public async Task<IActionResult> AddOrganization(TmX_CorporateDto TmX_CorporateDto)
+        public async Task<IActionResult> AddOrganization(TmX_CorporateDto OrganizationDto)
         {
-            if (await uow.TmX_CorporateService.IsTmX_CorporateExist(TmX_CorporateDto.Corporate_Name))
+            if (await uow.TmX_CorporateService.IsTmX_CorporateExist(OrganizationDto.Corporate_Name))
             {
                 APIError apiError = new APIError();
                 apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "TmX_Corporate name already exist";
+                apiError.ErrorMessage = "Organization is already exist";
                 return BadRequest(apiError);
             }
 
-            var depart = mapper.Map<TmX_Corporate>(TmX_CorporateDto);
-            uow.TmX_CorporateService.Add(depart);
+            var org = mapper.Map<TmX_Corporate>(OrganizationDto);
+            
+            uow.TmX_CorporateService.Add(org);
+            
             await uow.SaveAsync();
-            return Ok(depart);
+            return Ok(org);
         }
 
         [HttpPut("updateOrganization")]
-        public async Task<IActionResult> UpdateOrganization(TmX_CorporateDto TmX_CorporateDto)
+        public async Task<IActionResult> UpdateOrganization(TmX_CorporateDto OrganizationDto)
         {
             APIError apiError = new APIError();
 
-            if (await uow.TmX_CorporateService.IsTmX_CorporateExistInUpdate(TmX_CorporateDto.Corporate_Name, TmX_CorporateDto.Corporate_Id))
+            if (await uow.TmX_CorporateService.IsTmX_CorporateExistInUpdate(OrganizationDto.Corporate_Name, OrganizationDto.Corporate_Id))
             {
                 apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "TmX_Corporate name already exist";
+                apiError.ErrorMessage = "Organization is already exist";
                 return BadRequest(apiError);
             }
 
-            var TmX_CorporateFromDb = await uow.TmX_CorporateService.Get(TmX_CorporateDto.Corporate_Id);
+            var OrganizationFromDb = await uow.TmX_CorporateService.Get(OrganizationDto.Corporate_Id);
 
-            if (TmX_CorporateFromDb == null)
+            if (OrganizationFromDb == null)
             {
                 apiError.ErrorCode = BadRequest().StatusCode;
                 apiError.ErrorMessage = "TmX_Corporate not found";
                 return BadRequest(apiError);
             }
 
-            mapper.Map(TmX_CorporateDto, TmX_CorporateFromDb);
-
+            mapper.Map(OrganizationDto, OrganizationFromDb);
+            
+            OrganizationDto.Last_Updated_Date = DateTime.Now;
+            
             await uow.SaveAsync();
-            return Ok(TmX_CorporateDto);
+            return Ok(OrganizationDto);
         }
 
         

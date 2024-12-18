@@ -3,7 +3,7 @@ namespace CorporatePortalApi.Dtos
 {
     public class TmX_ProductDto
     {
-        public int Product_ID { get; set; }
+        public int? Product_ID { get; set; }
         public int Tenant_ID { get; set; }
         public string Product_Code { get; set; }
         public string Product_Name { get; set; }
@@ -22,8 +22,8 @@ namespace CorporatePortalApi.Dtos
         public bool Active_Flag { get; set; }
         public DateTime Effective_Start_Date { get; set; }
         public DateTime Effective_End_Date { get; set; }
-        public string Created_By { get; set; }
-        public DateTime Created_Date { get; set; }
+        public string? Created_By { get; set; }
+        public DateTime? Created_Date { get; set; }
         public string Last_Updated_By { get; set; }
         public DateTime? Last_Updated_Date { get; set; }
         public int? Product_Classification_Lkp { get; set; }

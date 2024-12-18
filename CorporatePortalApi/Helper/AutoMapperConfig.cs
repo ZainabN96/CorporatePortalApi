@@ -10,7 +10,8 @@ namespace CorporatePortalApi.Helper
         {
             var config = new MapperConfiguration(cfg =>
             {
-                //cfg.CreateMap<Department, DepartmentDto>().ReverseMap();
+                cfg.CreateMap<TmX_Corporate, TmX_CorporateDto>().ReverseMap();
+                cfg.CreateMap<TmX_Product, TmX_ProductDto>().ReverseMap();
                 
             });
 

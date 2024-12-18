@@ -12,12 +12,12 @@ namespace CorporatePortalApi.Data.Services
         {
             this.dc = dc;
         }
-        public TmX_Corporate Add(TmX_Corporate TmX_Corporate)
+        public TmX_Corporate Add(TmX_Corporate Organization)
         {
+            Organization.Last_Updated_Date = DateTime.Now;
+            dc.TmX_Corporate.Add(Organization);
 
-            dc.TmX_Corporate.Add(TmX_Corporate);
-
-            return TmX_Corporate;
+            return Organization;
         }
 
         public async Task<TmX_Corporate> Get(int id)
