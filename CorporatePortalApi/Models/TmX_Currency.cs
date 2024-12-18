@@ -1,4 +1,6 @@
-﻿namespace CorporatePortalApi.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CorporatePortalApi.Models
 {
     public class TmX_Currency
     {

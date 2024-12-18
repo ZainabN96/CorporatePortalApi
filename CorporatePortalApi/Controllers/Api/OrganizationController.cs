@@ -47,7 +47,7 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPost("addOrganization")]
         public async Task<IActionResult> AddOrganization(TmX_CorporateDto TmX_CorporateDto)
         {
-            if (await uow.TmX_CorporateService.IsTmX_CorporateExist(TmX_CorporateDto.Name))
+            if (await uow.TmX_CorporateService.IsTmX_CorporateExist(TmX_CorporateDto.Corporate_Name))
             {
                 APIError apiError = new APIError();
                 apiError.ErrorCode = BadRequest().StatusCode;
@@ -66,14 +66,14 @@ namespace CorporatePortalApi.Controllers.Api
         {
             APIError apiError = new APIError();
 
-            if (await uow.TmX_CorporateService.IsTmX_CorporateExistInUpdate(TmX_CorporateDto.Name, TmX_CorporateDto.Id))
+            if (await uow.TmX_CorporateService.IsTmX_CorporateExistInUpdate(TmX_CorporateDto.Corporate_Name, TmX_CorporateDto.Corporate_Id))
             {
                 apiError.ErrorCode = BadRequest().StatusCode;
                 apiError.ErrorMessage = "TmX_Corporate name already exist";
                 return BadRequest(apiError);
             }
 
-            var TmX_CorporateFromDb = await uow.TmX_CorporateService.Get(TmX_CorporateDto.Id);
+            var TmX_CorporateFromDb = await uow.TmX_CorporateService.Get(TmX_CorporateDto.Corporate_Id);
 
             if (TmX_CorporateFromDb == null)
             {
@@ -84,9 +84,6 @@ namespace CorporatePortalApi.Controllers.Api
 
             mapper.Map(TmX_CorporateDto, TmX_CorporateFromDb);
 
-            TmX_CorporateFromDb.IsActive = true;
-            TmX_CorporateFromDb.IsDelete = false;
-            TmX_CorporateFromDb.LastUpdatedOn = DateTime.Now;
             await uow.SaveAsync();
             return Ok(TmX_CorporateDto);
         }
