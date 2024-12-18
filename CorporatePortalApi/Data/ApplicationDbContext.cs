@@ -12,16 +12,14 @@ namespace CorporatePortalApi.Data
         {
         }
         public DbSet<TmX_Corporate> TmX_Corporate { get; set; }
-        public DbSet<TmX_Address_Geography> TmX_Address_Geography { get; set; }
+        /*public DbSet<TmX_Address_Geography> TmX_Address_Geography { get; set; }
         public DbSet<TmX_Lookup> TmX_Lookup { get; set; }
         public DbSet<TMX_Tenant> TMX_Tenants { get; set; }
         public DbSet<TMX_Address> TMX_Address { get; set; }
         public DbSet<TMX_Locale> TMX_Locale { get; set; }
         public DbSet<TMX_Time_Zone> TMX_Time_Zone { get; set; }
-        public DbSet<AspNetUser> AspNetUsers { get; set; }
+        public DbSet<AspNetUser> AspNetUsers { get; set; }*/
         
-        
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

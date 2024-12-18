@@ -2,7 +2,7 @@
 {
     public class TmX_CorporateDto
     {
-        public int? Corporate_Id { get; set; }
+        public int Corporate_Id { get; set; }
         public string Corporate_Name { get; set; }
         public string Corporate_Code { get; set; }
         public string? Corporate_Description { get; set; }
