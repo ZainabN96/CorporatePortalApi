@@ -96,6 +96,6 @@ namespace CorporatePortalApi.Models
        public virtual TmX_Bank Bank { get; set; }
 
        [ForeignKey("Tenant_ID")]
-       public virtual TMX_Tenant Tenant { get; set; }
+       public virtual TmX_Tenant Tenant { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace CorporatePortalApi.Models
 {
-    public class TMX_Locale
+    public class TmX_Locale
     {
         [Key]
         public int Locale_ID { get; set; }

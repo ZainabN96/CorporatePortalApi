@@ -17,7 +17,7 @@ namespace CorporatePortalApi.Models
         public int Tenant_ID { get; set; }
 
         [ForeignKey("Tenant_ID")]
-        public virtual TMX_Tenant Tenant { get; set; }
+        public virtual TmX_Tenant Tenant { get; set; }
 
         [Required]
         [MaxLength(50)]

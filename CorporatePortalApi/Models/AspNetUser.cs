@@ -37,16 +37,16 @@ namespace CorporatePortalApi.Models
         public string UserName { get; set; }
 
         public int? Address_ID { get; set; }
-        public virtual TMX_Address Address { get; set; }
+        public virtual TmX_Address Address { get; set; }
 
         public int? Locale_ID { get; set; }
-        public virtual TMX_Locale Locale { get; set; }
+        public virtual TmX_Locale Locale { get; set; }
 
         public int? Time_Zone_ID { get; set; }
-        public virtual TMX_Time_Zone TimeZone { get; set; }
+        public virtual TmX_Time_Zone TimeZone { get; set; }
 
         public int? Tenant_ID { get; set; }
-        public virtual TMX_Tenant Tenant { get; set; }
+        public virtual TmX_Tenant Tenant { get; set; }
 
         [Required]
         public DateTime RegistrationDate { get; set; }
