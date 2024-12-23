@@ -1,4 +1,5 @@
-﻿using CorporatePortalApi.Models;
+﻿using CorporatePortalApi.Data.Services;
+using CorporatePortalApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
@@ -19,9 +20,13 @@ namespace CorporatePortalApi.Data
         public DbSet<TmX_Locale> TmX_Locale { get; set; }
         public DbSet<TmX_Time_Zone> TmX_Time_Zone { get; set; }
         public DbSet<AspNetUser> AspNetUsers { get; set; }*/
+        public DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
         public DbSet<TmX_Bank> TmX_Bank { get; set; }
         public DbSet<TmX_Location> TmX_Location { get; set; }
         public DbSet<TmX_Currency> TmX_Currency { get; set; }
+        public DbSet<TmX_Product> TmX_Product { get; set; }
+        public DbSet<TmX_User> TmX_User { get; set; }
+        public DbSet<TmX_User_To_Corporate_Mapping> TmX_User_To_Corporate_Mapping { get; set; }
 
         public DbSet<AspNetRole>  AspNetRole { get; set; }
 
