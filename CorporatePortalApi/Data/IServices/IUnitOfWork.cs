@@ -12,6 +12,12 @@
         ITmX_LocaleService TmX_LocaleService { get; }
         ITmX_Time_ZoneService TmX_Time_ZoneService { get; }
 
+        IAspNetRoleService AspNetRoleService { get; }
+
+        ITmX_Address_GeographyService TmX_Address_GeographyService { get; }
+
+        ITmX_LookupService TmX_LookupService { get; }
+
         Task<bool> SaveAsync();
     }
 }

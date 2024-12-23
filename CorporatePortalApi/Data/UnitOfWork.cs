@@ -22,6 +22,12 @@ namespace CorporatePortalApi
         public ITmX_LocaleService TmX_LocaleService => new TmX_LocaleService(dc);
         public ITmX_Time_ZoneService TmX_Time_ZoneService => new TmX_Time_ZoneService(dc);
 
+        public IAspNetRoleService AspNetRoleService => new AspNetRoleService(dc);   
+
+      public ITmX_Address_GeographyService TmX_Address_GeographyService => new TmX_Address_GeographyService(dc);    
+
+        public ITmX_LookupService TmX_LookupService => new TmX_LookupService(dc);
+
         public async Task<bool> SaveAsync()
         {
             try

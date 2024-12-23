@@ -23,6 +23,11 @@ namespace CorporatePortalApi.Data
         public DbSet<TmX_Location> TmX_Location { get; set; }
         public DbSet<TmX_Currency> TmX_Currency { get; set; }
 
+        public DbSet<AspNetRole>  AspNetRole { get; set; }
+
+        public DbSet<TmX_Lookup> TmX_Lookup { get; set; }
+
+        public DbSet<TmX_Address_Geography> TmX_Address_Geography { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
