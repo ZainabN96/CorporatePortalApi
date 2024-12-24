@@ -23,7 +23,7 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpGet("get/{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var entry = await uow.TmX_CorporateService.Get(id);
+            var entry = await uow.CorporateService.Get(id);
 
             if (entry == null)
             {
@@ -39,7 +39,7 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAll()
         {
-            var entries = await uow.TmX_CorporateService.GetOrganizationAsync();
+            var entries = await uow.CorporateService.GetOrganizationAsync();
 
             return Ok(entries);
         }
@@ -47,7 +47,7 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPost("addOrganization")]
         public async Task<IActionResult> AddOrganization(TmX_CorporateDto OrganizationDto)
         {
-            if (await uow.TmX_CorporateService.IsTmX_CorporateExist(OrganizationDto.Corporate_Name))
+            if (await uow.CorporateService.IsCorporateExist(OrganizationDto.Corporate_Name))
             {
                 APIError apiError = new APIError();
                 apiError.ErrorCode = BadRequest().StatusCode;
@@ -57,7 +57,7 @@ namespace CorporatePortalApi.Controllers.Api
 
             var org = mapper.Map<TmX_Corporate>(OrganizationDto);
             
-            uow.TmX_CorporateService.Add(org);
+            uow.CorporateService.Add(org);
             
             await uow.SaveAsync();
             return Ok(org);
@@ -68,19 +68,19 @@ namespace CorporatePortalApi.Controllers.Api
         {
             APIError apiError = new APIError();
 
-            if (await uow.TmX_CorporateService.IsTmX_CorporateExistInUpdate(OrganizationDto.Corporate_Name, OrganizationDto.Corporate_Id))
+            if (await uow.CorporateService.IsCorporateExistInUpdate(OrganizationDto.Corporate_Name, OrganizationDto.Corporate_Id))
             {
                 apiError.ErrorCode = BadRequest().StatusCode;
                 apiError.ErrorMessage = "Organization is already exist";
                 return BadRequest(apiError);
             }
 
-            var OrganizationFromDb = await uow.TmX_CorporateService.Get(OrganizationDto.Corporate_Id);
+            var OrganizationFromDb = await uow.CorporateService.Get(OrganizationDto.Corporate_Id);
 
             if (OrganizationFromDb == null)
             {
                 apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "TmX_Corporate not found";
+                apiError.ErrorMessage = "Corporate not found";
                 return BadRequest(apiError);
             }
 
@@ -94,7 +94,7 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPost("deleteOrgianization")]
         public async Task<IActionResult> DeleteOrgianization(DeleteKeyPairDto deleteKeyPairDto)
         {
-            var OrgFromDb = await uow.TmX_CorporateService.Get(deleteKeyPairDto.Id);
+            var OrgFromDb = await uow.CorporateService.Get(deleteKeyPairDto.Id);
 
             if (OrgFromDb == null)
             {

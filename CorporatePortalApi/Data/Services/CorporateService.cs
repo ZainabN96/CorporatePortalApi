@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CorporatePortalApi.Data.Services
 {
-    public class TmX_CorporateService: ITmX_CorporateService
+    public class CorporateService: ICorporateService
     {
         private readonly ApplicationDbContext dc;
 
-        public TmX_CorporateService(ApplicationDbContext dc)
+        public CorporateService(ApplicationDbContext dc)
         {
             this.dc = dc;
         }
@@ -38,12 +38,12 @@ namespace CorporatePortalApi.Data.Services
                                        .ToListAsync();
         }
 
-        public async Task<bool> IsTmX_CorporateExist(string name)
+        public async Task<bool> IsCorporateExist(string name)
         {
             return await dc.TmX_Corporate.AnyAsync(x => x.Corporate_Name == name);
         }
 
-        public async Task<bool> IsTmX_CorporateExistInUpdate(string name, int id)
+        public async Task<bool> IsCorporateExistInUpdate(string name, int id)
         {
             return await dc.TmX_Corporate.AnyAsync(x => x.Corporate_Name == name && x.Corporate_Id != id);
         }

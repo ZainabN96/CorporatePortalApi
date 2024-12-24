@@ -13,7 +13,7 @@ namespace CorporatePortalApi
             this.dc = dc;
         }
         public IAspNetUserService AspNetUsersService => new AspNetUserService(dc);
-        public ITmX_CorporateService TmX_CorporateService => new TmX_CorporateService(dc);
+        public ICorporateService CorporateService => new CorporateService(dc);
         public ITmX_BankService TmX_BankService => new TmX_BankService(dc);
         public ITmX_CurrencyService TmX_CurrencyService => new TmX_CurrencyService(dc);
         public ITmX_LocationService TmX_LocationService => new TmX_LocationService(dc);
