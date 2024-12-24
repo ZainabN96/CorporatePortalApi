@@ -30,15 +30,15 @@ namespace CorporatePortalApi.Data.Services
         {
             return await dc.TmX_Bank.FindAsync(id);
         }
-        public async Task<bool> IsBankExist(string name)
-        {
-            return await dc.TmX_Bank.AnyAsync(x => x.Bank_Name == name);
-        }
 
-        public async Task<bool> IsBankExistInUpdate(string name, int id)
-        {
-            return await dc.TmX_Bank.AnyAsync(x => x.Bank_Name == name && x.Bank_ID != id);
-        }
+		public async Task<bool> IsTmX_BankExist(string bankName)
+		{
+			return await dc.TmX_Bank.AnyAsync(x => x.Bank_Name == bankName);
+		}
 
-    }
+		public async Task<bool> IsTmX_BankExistInUpdate(string bankName, int id)
+		{
+			return await dc.TmX_Bank.AnyAsync(x => x.Bank_Name == bankName && x.Bank_ID != id);
+		}
+	}
 }
