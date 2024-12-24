@@ -1,5 +1,6 @@
 ﻿using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CorporatePortalApi.Data.Services
 {
@@ -13,7 +14,7 @@ namespace CorporatePortalApi.Data.Services
         }
         public TmX_Locale Add(TmX_Locale locale)
         {
-            locale.Last_Updated_Date = DateTime.Now;
+            //locale.Last_Updated_Date = DateTime.Now;
             dc.TmX_Locale.Add(locale);
 
             return locale;
@@ -26,7 +27,7 @@ namespace CorporatePortalApi.Data.Services
 
         public async Task<IEnumerable<TmX_Locale>> GetTmX_LocaleAsync()
         {
-            return await dc.TmX_Locale.Where(x => x.Active_Flag == true)
+            return await dc.TmX_Locale
                                        .OrderBy(x => x.Locale_ID)
                                        .ToListAsync();
         }

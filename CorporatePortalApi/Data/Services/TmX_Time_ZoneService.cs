@@ -1,5 +1,6 @@
 ﻿using CorporatePortalApi.Models;
 using CorporatePortalApi.Data.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace CorporatePortalApi.Data.Services
 {

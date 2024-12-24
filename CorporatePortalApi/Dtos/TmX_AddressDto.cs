@@ -1,4 +1,5 @@
 ﻿using CorporatePortalApi.Models;
+using NetTopologySuite.Geometries;
 
 
 namespace CorporatePortalApi.Dtos

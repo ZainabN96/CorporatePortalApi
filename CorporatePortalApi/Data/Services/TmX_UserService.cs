@@ -1,5 +1,6 @@
 ﻿using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CorporatePortalApi.Data.Services
 {
@@ -31,7 +32,7 @@ namespace CorporatePortalApi.Data.Services
         }
         public async Task<TmX_User> GetWithServer_User_ID(string serverUId)
         {
-            return await dc.TmX_User.Where(x => x.Server_User_ID == serverId)
+            return await dc.TmX_User.Where(x => x.Server_User_ID == serverUId)
                                        .FirstOrDefaultAsync();
         }
 

@@ -13,13 +13,13 @@ namespace CorporatePortalApi.Data
         {
         }
         public DbSet<TmX_Corporate> TmX_Corporate { get; set; }
-        /*public DbSet<TmX_Address_Geography> TmX_Address_Geography { get; set; }
+        public DbSet<TmX_Address_Geography> TmX_Address_Geography { get; set; }
         public DbSet<TmX_Lookup> TmX_Lookup { get; set; }
         public DbSet<TmX_Tenant> TmX_Tenants { get; set; }
         public DbSet<TmX_Address> TmX_Address { get; set; }
         public DbSet<TmX_Locale> TmX_Locale { get; set; }
         public DbSet<TmX_Time_Zone> TmX_Time_Zone { get; set; }
-        public DbSet<AspNetUser> AspNetUsers { get; set; }*/
+        public DbSet<AspNetUser> AspNetUsers { get; set; }
         public DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
         public DbSet<TmX_Bank> TmX_Bank { get; set; }
         public DbSet<TmX_Location> TmX_Location { get; set; }
@@ -30,9 +30,6 @@ namespace CorporatePortalApi.Data
 
         public DbSet<AspNetRole>  AspNetRole { get; set; }
 
-        public DbSet<TmX_Lookup> TmX_Lookup { get; set; }
-
-        public DbSet<TmX_Address_Geography> TmX_Address_Geography { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,7 +41,7 @@ namespace CorporatePortalApi.Data
                 str => string.IsNullOrEmpty(str) ? null : ParsePointFromString(str) // String to Point
             );
 
-            modelBuilder.Entity<TMX_Address>()
+            modelBuilder.Entity<TmX_Address>()
                 .Property(a => a.Address_Coordinates)
                 .HasConversion(pointToStringConverter)
                 .HasColumnType("geography");
