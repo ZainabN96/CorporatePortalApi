@@ -25,5 +25,24 @@ namespace CorporatePortalApi.Data.Services
             return await dc.TmX_Lookup.FindAsync(id);   
 
         }
+
+       public async Task<IEnumerable<TmX_Lookup>> GetAllLookupAsync()
+
+        {
+                return await dc.TmX_Lookup.Where(x => x.Is_Active == true)
+                                           .OrderBy(x => x.Lookup_Name)
+                                           .ToListAsync();
+        }
+
+        public async Task<bool> IsTmX_LookupExist(string lookupName)
+        {
+            return await dc.TmX_Lookup.AnyAsync(x => x.Lookup_Name == lookupName);
+        }
+
+        public async Task<bool> IsTmX_LookupExistInUpdate(string lookupName, int id)
+        {
+            return await dc.TmX_Lookup.AnyAsync(x => x.Lookup_Name == lookupName && x.Lookup_ID != id);
+
+        }
     }
 }
