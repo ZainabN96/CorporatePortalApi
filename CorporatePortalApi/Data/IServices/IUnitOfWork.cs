@@ -7,7 +7,7 @@ namespace CorporatePortalApi.Data.IServices
         IAspNetUserService AspNetUsersService { get; }
         ICorporateService CorporateService { get; }
         ITmX_BankService TmX_BankService { get; }
-        ITmX_CurrencyService TmX_CurrencyService { get; }
+        ICurrencyService CurrencyService { get; }
         ITmX_LocationService TmX_LocationService { get; }
         ITmX_AddressService TmX_AddressService { get; }
         ITmX_TenantService TmX_TenantService { get; }
