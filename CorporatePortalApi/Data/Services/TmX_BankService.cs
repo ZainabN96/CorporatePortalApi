@@ -1,5 +1,6 @@
 ﻿using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CorporatePortalApi.Data.Services
 {
@@ -23,6 +24,27 @@ namespace CorporatePortalApi.Data.Services
         {
             return await dc.TmX_Bank.FindAsync(id);
         }
+		public async Task<TmX_Bank> GetWithBankName(string bname)
+		{
+			return await dc.TmX_Bank.Where(x => x.Bank_Name == bname)
+									   .FirstOrDefaultAsync();
+		}
+		
+		public async Task<IEnumerable<TmX_Bank>> GetTmX_BankAsync()
+		{
+			return await dc.TmX_Bank.Where(x => x.Is_Active == true)
+									   .OrderBy(x => x.Bank_Name)
+									   .ToListAsync();
+		}
 
-    }
+		public async Task<bool> IsTmX_BankExist(string bankName)
+		{
+			return await dc.TmX_Bank.AnyAsync(x => x.Bank_Name == bankName);
+		}
+
+		public async Task<bool> IsTmX_BankExistInUpdate(string bankName, int id)
+		{
+			return await dc.TmX_Bank.AnyAsync(x => x.Bank_Name == bankName && x.Bank_ID != id);
+		}
+	}
 }
