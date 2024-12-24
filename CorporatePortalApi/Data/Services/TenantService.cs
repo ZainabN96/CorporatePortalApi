@@ -15,6 +15,7 @@ namespace CorporatePortalApi.Data.Services
         public TmX_Tenant Add(TmX_Tenant tenant)
         {
             tenant.Last_Updated_Date = DateTime.Now;
+            tenant.Tenant_Blocked_Flag = false;
             dc.TmX_Tenants.Add(tenant);
 
             return tenant;

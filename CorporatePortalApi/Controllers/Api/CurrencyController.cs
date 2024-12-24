@@ -20,6 +20,22 @@ namespace CorporatePortalApi.Controllers.Api
 			this.mapper = mapper;
 		}
 
+		[HttpGet("get/{id}")]
+		public async Task<IActionResult> Get(int id)
+		{
+			var entry = await uow.CurrencyService.Get(id);
+
+			if (entry == null)
+			{
+				APIError apiError = new APIError();
+				apiError.ErrorCode = NoContent().StatusCode;
+				apiError.ErrorMessage = "Currency not found";
+				return BadRequest(apiError);
+			}
+
+			return Ok(entry);
+		}
+
 		[HttpGet("getAll")]
 		public async Task<IActionResult> GetAll()
 		{

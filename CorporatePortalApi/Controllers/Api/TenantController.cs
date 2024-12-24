@@ -20,6 +20,23 @@ namespace CorporatePortalApi.Controllers.Api
 			this.mapper = mapper;
 		}
 
+		[HttpGet("get/{id}")]
+		public async Task<IActionResult> Get(int id)
+		{
+			var entry = await uow.TenantService.Get(id);
+
+			if (entry == null)
+			{
+				APIError apiError = new APIError();
+				apiError.ErrorCode = NoContent().StatusCode;
+				apiError.ErrorMessage = "Tenant not found";
+				return BadRequest(apiError);
+			}
+
+			return Ok(entry);
+		}
+
+
 		[HttpGet("getAll")]
 		public async Task<IActionResult> GetAll()
 		{
@@ -71,6 +88,7 @@ namespace CorporatePortalApi.Controllers.Api
 			mapper.Map(TenantDto, TenantFromDb);
 
 			TenantDto.Last_Updated_Date = DateTime.Now;
+			TenantFromDb.Tenant_Blocked_Flag = false;
 
 			await uow.SaveAsync();
 			return Ok(TenantDto);
@@ -90,6 +108,7 @@ namespace CorporatePortalApi.Controllers.Api
 			}
 
 			TenantFromDb.Active_Flag = false;
+			TenantFromDb.Tenant_Blocked_Flag = true;
 			TenantFromDb.Last_Updated_Date = DateTime.Now;
 
 			await uow.SaveAsync();
