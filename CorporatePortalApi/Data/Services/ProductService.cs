@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CorporatePortalApi.Data.Services
 {
-    public class TmX_ProductService : ITmX_ProductService
+    public class ProductService : IProductService
     {
         private readonly ApplicationDbContext dc;
 
-        public TmX_ProductService(ApplicationDbContext dc)
+        public ProductService(ApplicationDbContext dc)
         {
             this.dc = dc;
         }
@@ -36,19 +36,19 @@ namespace CorporatePortalApi.Data.Services
                                        .FirstOrDefaultAsync();
         }
         
-        public async Task<IEnumerable<TmX_Product>> GetTmX_ProductAsync()
+        public async Task<IEnumerable<TmX_Product>> GetProductAsync()
         {
             return await dc.TmX_Product.Where(x => x.Active_Flag == true)
                                        .OrderBy(x => x.Product_Name)
                                        .ToListAsync();
         }
 
-        public async Task<bool> IsTmX_ProductExist(string pName)
+        public async Task<bool> IsProductExist(string pName)
         {
             return await dc.TmX_Product.AnyAsync(x => x.Product_Name == pName);
         }
 
-        public async Task<bool> IsTmX_ProductExistInUpdate(string pname, int id)
+        public async Task<bool> IsProductExistInUpdate(string pname, int id)
         {
             return await dc.TmX_Product.AnyAsync(x => x.Product_Name == pname && x.Product_ID != id);
         }

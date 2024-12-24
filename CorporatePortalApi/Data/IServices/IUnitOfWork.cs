@@ -14,7 +14,7 @@ namespace CorporatePortalApi.Data.IServices
         ITmX_LocaleService TmX_LocaleService { get; }
         ITmX_Time_ZoneService TmX_Time_ZoneService { get; }
         IAspNetUserRoleService AspNetUserRolesService { get; }
-        ITmX_ProductService TmX_ProductService { get; }
+        IProductService ProductService { get; }
         ITmX_UserService TmX_UserService { get; }
         ITmX_User_To_Corporate_MappingService TmX_User_To_Corporate_MappingService { get; }
 

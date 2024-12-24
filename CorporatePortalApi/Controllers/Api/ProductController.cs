@@ -19,10 +19,35 @@ namespace CorporatePortalApi.Controllers.Api
             this.uow = uow;
             this.mapper = mapper;
         }
+
+        [HttpGet("get/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var entry = await uow.ProductService.Get(id);
+
+            if (entry == null)
+            {
+                APIError apiError = new APIError();
+                apiError.ErrorCode = NoContent().StatusCode;
+                apiError.ErrorMessage = "Product not found";
+                return BadRequest(apiError);
+            }
+
+            return Ok(entry);
+        }
+
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var entries = await uow.ProductService.GetProductAsync();
+
+            return Ok(entries);
+        }
+
         [HttpPost("addProduct")]
         public async Task<IActionResult> AddProduct(TmX_ProductDto Product)
         {
-            if (await uow.TmX_ProductService.IsTmX_ProductExist(Product.Product_Name))
+            if (await uow.ProductService.IsProductExist(Product.Product_Name))
             {
                 APIError apiError = new APIError();
                 apiError.ErrorCode = BadRequest().StatusCode;
@@ -32,7 +57,7 @@ namespace CorporatePortalApi.Controllers.Api
 
             var pro = mapper.Map<TmX_Product>(Product);
 
-            uow.TmX_ProductService.Add(pro);
+            uow.ProductService.Add(pro);
 
             await uow.SaveAsync();
             return Ok(pro);
