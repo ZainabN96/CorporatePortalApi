@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CorporatePortalApi.Data.Services
 {
-    public class TmX_TenantService: ITmX_TenantService
+    public class TenantService: ITenantService
     {
         private readonly ApplicationDbContext dc;
 
-        public TmX_TenantService(ApplicationDbContext dc)
+        public TenantService(ApplicationDbContext dc)
         {
             this.dc = dc;
         }
@@ -31,19 +31,19 @@ namespace CorporatePortalApi.Data.Services
                                        .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<TmX_Tenant>> GetTmX_TenantAsync()
+        public async Task<IEnumerable<TmX_Tenant>> GetAllTenantAsync()
         {
             return await dc.TmX_Tenants.Where(x => x.Active_Flag == true)
                                        .OrderBy(x => x.Tenant_Name)
                                        .ToListAsync();
         }
 
-        public async Task<bool> IsTmX_TenantExist(string name)
+        public async Task<bool> IsTenantExist(string name)
         {
             return await dc.TmX_Tenants.AnyAsync(x => x.Tenant_Name == name);
         }
 
-        public async Task<bool> IsTmX_TenantExistInUpdate(string name, int id)
+        public async Task<bool> IsTenantExistInUpdate(string name, int id)
         {
             return await dc.TmX_Tenants.AnyAsync(x => x.Tenant_Name == name && x.Tenant_ID != id);
         }

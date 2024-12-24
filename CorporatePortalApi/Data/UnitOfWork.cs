@@ -18,7 +18,7 @@ namespace CorporatePortalApi
         public ICurrencyService CurrencyService => new CurrencyService(dc);
         public ITmX_LocationService TmX_LocationService => new TmX_LocationService(dc);
         public ITmX_AddressService TmX_AddressService => new TmX_AddressService(dc);
-        public ITmX_TenantService TmX_TenantService => new TmX_TenantService(dc);
+        public ITenantService TenantService => new TenantService(dc);
         public ITmX_LocaleService TmX_LocaleService => new TmX_LocaleService(dc);
         public ITmX_Time_ZoneService TmX_Time_ZoneService => new TmX_Time_ZoneService(dc);
         public IAspNetUserRoleService AspNetUserRolesService => new AspNetUserRoleService(dc);
