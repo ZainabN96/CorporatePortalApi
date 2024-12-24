@@ -5,7 +5,6 @@ namespace CorporatePortalApi.Models
     public class AspNetRole
     {
         [Key]
-        [Required]
         [MaxLength(128)]
         public string Id { get; set; }
 
@@ -18,5 +17,6 @@ namespace CorporatePortalApi.Models
 
         [Required]
         public  DateTime Effective_End_Date { get; set; }
+        public virtual ICollection<AspNetUserRole> UserRoles { get; set; }
     }
 }

@@ -29,11 +29,9 @@ namespace CorporatePortalApi.Models
         [Required]
         public DateTime Created_Date { get; set; }
 
-
         [MaxLength(100)]
         public string? Last_Updated_By { get; set; }
 
-        
         public DateTime? Last_Updated_Date { get; set; }
 
         [Required]
@@ -43,9 +41,6 @@ namespace CorporatePortalApi.Models
         public bool Active_Flag { get; set; }
 
         public int? Geography_Type_Lkp_ID { get; set; }
-
-
-
 
     }
 }

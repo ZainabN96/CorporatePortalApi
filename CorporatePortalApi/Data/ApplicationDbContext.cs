@@ -45,6 +45,54 @@ namespace CorporatePortalApi.Data
                 .Property(a => a.Address_Coordinates)
                 .HasConversion(pointToStringConverter)
                 .HasColumnType("geography");
+
+            modelBuilder.Entity<AspNetUserRole>()
+            .HasKey(ur => new { ur.UserId, ur.RoleId });
+
+            modelBuilder.Entity<AspNetUserRole>()
+                .HasOne(ur => ur.User)
+                .WithMany(u => u.UserRoles)
+                .HasForeignKey(ur => ur.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<AspNetUserRole>()
+                .HasOne(ur => ur.Role)
+                .WithMany(r => r.UserRoles)
+                .HasForeignKey(ur => ur.RoleId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<TmX_User>()
+                 .HasOne(u => u.ParentUser)
+                 .WithMany()
+                 .HasForeignKey(u => u.Parent_User_ID)
+                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete for the self-referencing relationship
+
+            // Configure other relationships
+            modelBuilder.Entity<TmX_User>()
+                .HasOne(u => u.Tenant)
+                .WithMany()
+                .HasForeignKey(u => u.Tenant_ID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure TmX_Address and its relationships
+            modelBuilder.Entity<TmX_Address>()
+                .HasOne(a => a.Tenant)
+                .WithMany()
+                .HasForeignKey(a => a.Tenant_ID)
+                .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
+
+            modelBuilder.Entity<TmX_Address>()
+                .HasOne(a => a.AddressGeography)
+                .WithMany()
+                .HasForeignKey(a => a.Address_Geography_ID)
+                .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
+
+            modelBuilder.Entity<TmX_Address>()
+                .HasOne(a => a.AddressTypeLookup)
+                .WithMany()
+                .HasForeignKey(a => a.Address_Type_Lkp_ID)
+                .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
+
         }
 
         // Helper function to parse Point from the WKT string format "POINT (longitude latitude)"
@@ -63,6 +111,8 @@ namespace CorporatePortalApi.Data
             // Create a new Point object from parsed coordinates
             return new Point(longitude, latitude);
         }
+
+
 
     }
 }

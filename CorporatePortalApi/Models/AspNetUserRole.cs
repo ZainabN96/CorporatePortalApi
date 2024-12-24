@@ -8,7 +8,7 @@ namespace CorporatePortalApi.Models
         [Key, Column(Order = 0)]
         [Required]
         [MaxLength(128)]
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         [Key, Column(Order = 1)]
         [Required]

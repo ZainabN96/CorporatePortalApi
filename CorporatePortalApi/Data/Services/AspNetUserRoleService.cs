@@ -25,7 +25,7 @@ namespace CorporatePortalApi.Data.Services
             return await dc.AspNetUserRoles.FindAsync(id);
         }
 
-        public async Task<AspNetUserRole> GetWithUserId(string userId)
+        public async Task<AspNetUserRole> GetWithUserId(int userId)
         {
             return await dc.AspNetUserRoles.Where(x => x.UserId == userId)
                                        .FirstOrDefaultAsync();

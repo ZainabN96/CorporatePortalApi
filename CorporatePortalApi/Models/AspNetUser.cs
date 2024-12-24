@@ -75,6 +75,7 @@ namespace CorporatePortalApi.Models
         public bool IsTwoFAEnabled { get; set; }
 
         public string? TwoFASecretKey { get; set; }
+        public virtual ICollection<AspNetUserRole> UserRoles { get; set; }
     }
 
 }
