@@ -12,6 +12,7 @@ namespace CorporatePortalApi.Helper
             {
                 cfg.CreateMap<TmX_Corporate, TmX_CorporateDto>().ReverseMap();
                 cfg.CreateMap<TmX_Product, TmX_ProductDto>().ReverseMap();
+                cfg.CreateMap<TmX_Bank, TmX_BankDto>().ReverseMap();
                 
             });
 

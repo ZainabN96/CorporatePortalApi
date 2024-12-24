@@ -39,7 +39,7 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAll()
         {
-            var entries = await uow.TmX_CorporateService.GetTmX_CorporateAsync();
+            var entries = await uow.TmX_CorporateService.GetOrganizationAsync();
 
             return Ok(entries);
         }
@@ -91,7 +91,26 @@ namespace CorporatePortalApi.Controllers.Api
             await uow.SaveAsync();
             return Ok(OrganizationDto);
         }
+        [HttpPost("deleteOrgianization")]
+        public async Task<IActionResult> DeleteOrgianization(DeleteKeyPairDto deleteKeyPairDto)
+        {
+            var OrgFromDb = await uow.TmX_CorporateService.Get(deleteKeyPairDto.Id);
 
-        
+            if (OrgFromDb == null)
+            {
+                APIError apiError = new APIError();
+                apiError.ErrorCode = NoContent().StatusCode;
+                apiError.ErrorMessage = "Orgianization not found";
+                return BadRequest(apiError);
+            }
+
+            OrgFromDb.Active_Flag = false;
+            OrgFromDb.Last_Updated_Date = DateTime.Now;
+
+            await uow.SaveAsync();
+
+            return Ok(deleteKeyPairDto);
+        }
+
     }  
 }

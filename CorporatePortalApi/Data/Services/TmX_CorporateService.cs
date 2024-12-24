@@ -31,7 +31,7 @@ namespace CorporatePortalApi.Data.Services
                                        .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<TmX_Corporate>> GetTmX_CorporateAsync()
+        public async Task<IEnumerable<TmX_Corporate>> GetOrganizationAsync()
         {
             return await dc.TmX_Corporate.Where(x => x.Active_Flag == true )
                                        .OrderBy(x => x.Corporate_Name)
