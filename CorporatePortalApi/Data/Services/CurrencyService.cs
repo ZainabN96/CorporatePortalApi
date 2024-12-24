@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CorporatePortalApi.Data.Services
 {
-    public class TmX_CurrencyService: ITmX_CurrencyService
+    public class CurrencyService: ICurrencyService
     {
         private readonly ApplicationDbContext dc;
 
-        public TmX_CurrencyService(ApplicationDbContext dc)
+        public CurrencyService(ApplicationDbContext dc)
         {
             this.dc = dc;
         }
@@ -29,19 +29,19 @@ namespace CorporatePortalApi.Data.Services
 									   .FirstOrDefaultAsync();
 		}
 
-		public async Task<IEnumerable<TmX_Currency>> GetTmX_CurrencyAsync()
+		public async Task<IEnumerable<TmX_Currency>> GetAllCurrencyAsync()
 		{
 			return await dc.TmX_Currency.Where(x => x.Active_Flag == true)
 									   .OrderBy(x => x.Currency_Symbol)
 									   .ToListAsync();
 		}
 
-		public async Task<bool> IsTmX_CurrencyExist(string currency)
+		public async Task<bool> IsCurrencyExist(string currency)
 		{
 			return await dc.TmX_Currency.AnyAsync(x => x.Currency_Symbol == currency);
 		}
 
-		public async Task<bool> IsTmX_CurrencyExistInUpdate(string currencyS, int id)
+		public async Task<bool> IsCurrencyExistInUpdate(string currencyS, int id)
 		{
 			return await dc.TmX_Currency.AnyAsync(x => x.Currency_Symbol == currencyS && x.Currency_ID != id);
 		}

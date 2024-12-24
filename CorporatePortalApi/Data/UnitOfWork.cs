@@ -14,8 +14,8 @@ namespace CorporatePortalApi
         }
         public IAspNetUserService AspNetUsersService => new AspNetUserService(dc);
         public ICorporateService CorporateService => new CorporateService(dc);
-        public IBankService TmX_BankService => new BankService(dc);
-        public ITmX_CurrencyService TmX_CurrencyService => new TmX_CurrencyService(dc);
+        public IBankService BankService => new BankService(dc);
+        public ICurrencyService CurrencyService => new CurrencyService(dc);
         public ITmX_LocationService TmX_LocationService => new TmX_LocationService(dc);
         public ITmX_AddressService TmX_AddressService => new TmX_AddressService(dc);
         public ITmX_TenantService TmX_TenantService => new TmX_TenantService(dc);

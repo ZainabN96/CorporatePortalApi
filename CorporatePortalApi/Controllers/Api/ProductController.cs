@@ -63,5 +63,55 @@ namespace CorporatePortalApi.Controllers.Api
             return Ok(pro);
         }
 
+        [HttpPut("updateProduct")]
+        public async Task<IActionResult> UpdateProduct(TmX_ProductDto ProductDto)
+        {
+            APIError apiError = new APIError();
+
+            if (await uow.ProductService.IsProductExistInUpdate(ProductDto.Product_Name, ProductDto.Product_ID))
+            {
+                apiError.ErrorCode = BadRequest().StatusCode;
+                apiError.ErrorMessage = "Product is already exist";
+                return BadRequest(apiError);
+            }
+
+            var ProductFromDb = await uow.CorporateService.Get(ProductDto.Product_ID);
+
+            if (ProductFromDb == null)
+            {
+                apiError.ErrorCode = BadRequest().StatusCode;
+                apiError.ErrorMessage = "Corporate not found";
+                return BadRequest(apiError);
+            }
+
+            mapper.Map(ProductDto, ProductFromDb);
+
+            ProductDto.Last_Updated_Date = DateTime.Now;
+
+            await uow.SaveAsync();
+            return Ok(ProductDto);
+        }
+
+        [HttpPost("deleteProduct")]
+        public async Task<IActionResult> DeleteProduct(DeleteKeyPairDto deleteKeyPairDto)
+        {
+            var OrgFromDb = await uow.CorporateService.Get(deleteKeyPairDto.Id);
+
+            if (OrgFromDb == null)
+            {
+                APIError apiError = new APIError();
+                apiError.ErrorCode = NoContent().StatusCode;
+                apiError.ErrorMessage = "Orgianization not found";
+                return BadRequest(apiError);
+            }
+
+            OrgFromDb.Active_Flag = false;
+            OrgFromDb.Last_Updated_Date = DateTime.Now;
+
+            await uow.SaveAsync();
+
+            return Ok(deleteKeyPairDto);
+        }
+
     }
 }

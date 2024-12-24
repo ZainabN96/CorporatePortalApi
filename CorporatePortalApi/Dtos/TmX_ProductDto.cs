@@ -3,7 +3,7 @@ namespace CorporatePortalApi.Dtos
 {
     public class TmX_ProductDto
     {
-        public int? Product_ID { get; set; }
+        public int Product_ID { get; set; }
         public int Tenant_ID { get; set; }
         public string Product_Code { get; set; }
         public string Product_Name { get; set; }
