@@ -2,7 +2,7 @@
 
 namespace CorporatePortalApi.Data.IServices
 {
-    public interface ITmX_BankService
+    public interface IBankService
     {
         Task<TmX_Bank> Get(int id);
         Task<IEnumerable<TmX_Bank>> GetAllBankAsync();

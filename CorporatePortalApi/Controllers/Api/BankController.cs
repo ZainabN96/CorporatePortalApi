@@ -24,7 +24,7 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAll()
         {
-            var entries = await uow.TmX_BankService.GetAllBankAsync();
+            var entries = await uow.BankService.GetAllBankAsync();
 
             return Ok(entries);
         }
@@ -32,7 +32,7 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPost("addBank")]
         public async Task<IActionResult> AddBank(TmX_BankDto BankDto)
         {
-            if (await uow.TmX_BankService.IsBankExist(BankDto.Bank_Name))
+            if (await uow.BankService.IsBankExist(BankDto.Bank_Name))
             {
                 APIError apiError = new APIError();
                 apiError.ErrorCode = BadRequest().StatusCode;
@@ -42,7 +42,7 @@ namespace CorporatePortalApi.Controllers.Api
 
             var bank = mapper.Map<TmX_Bank>(BankDto);
 
-            uow.TmX_BankService.Add(bank);
+            uow.BankService.Add(bank);
 
             await uow.SaveAsync();
             return Ok(bank);

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CorporatePortalApi.Data.Services
 {
-    public class TmX_BankService: ITmX_BankService
+    public class BankService: IBankService
     {
         private readonly ApplicationDbContext dc;
 
-        public TmX_BankService(ApplicationDbContext dc)
+        public BankService(ApplicationDbContext dc)
         {
             this.dc = dc;
         }
