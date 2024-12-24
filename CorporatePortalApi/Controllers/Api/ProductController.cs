@@ -75,12 +75,12 @@ namespace CorporatePortalApi.Controllers.Api
                 return BadRequest(apiError);
             }
 
-            var ProductFromDb = await uow.CorporateService.Get(ProductDto.Product_ID);
+            var ProductFromDb = await uow.ProductService.Get(ProductDto.Product_ID);
 
             if (ProductFromDb == null)
             {
                 apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Corporate not found";
+                apiError.ErrorMessage = "Product not found";
                 return BadRequest(apiError);
             }
 
@@ -95,18 +95,18 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPost("deleteProduct")]
         public async Task<IActionResult> DeleteProduct(DeleteKeyPairDto deleteKeyPairDto)
         {
-            var OrgFromDb = await uow.CorporateService.Get(deleteKeyPairDto.Id);
+            var ProFromDb = await uow.ProductService.Get(deleteKeyPairDto.Id);
 
-            if (OrgFromDb == null)
+            if (ProFromDb == null)
             {
                 APIError apiError = new APIError();
                 apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "Orgianization not found";
+                apiError.ErrorMessage = "Product not found";
                 return BadRequest(apiError);
             }
 
-            OrgFromDb.Active_Flag = false;
-            OrgFromDb.Last_Updated_Date = DateTime.Now;
+            ProFromDb.Active_Flag = false;
+            ProFromDb.Last_Updated_Date = DateTime.Now;
 
             await uow.SaveAsync();
 
