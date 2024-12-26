@@ -118,7 +118,7 @@ namespace CorporatePortalApi.Controllers.Api
                 return BadRequest(apiError);
             }
 
-            LookupFromDb.Is_Active = false;
+            LookupFromDb.Active_Flag = false;
             LookupFromDb.Last_Updated_Date = DateTime.Now;
 
             await uow.SaveAsync();
