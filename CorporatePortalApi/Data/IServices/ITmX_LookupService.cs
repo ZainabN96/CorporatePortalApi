@@ -10,8 +10,8 @@ namespace CorporatePortalApi.Data.IServices
         TmX_Lookup Add(TmX_Lookup TmX_Lookup);
         //Task<TmX_Lookup> GetWithLookupName(string lookupname);
         //Task<IEnumerable<TmX_Lookup>> GetTmX_LookupAsync();
-        Task<bool> IsTmX_LookupExist(string lookupName);
-        Task<bool> IsTmX_LookupExistInUpdate(string lookupName, int id);
+        Task<bool> IsLookupExist(string lookupName);
+        Task<bool> IsLookupExistInUpdate(string lookupName, int id);
 
     }
 

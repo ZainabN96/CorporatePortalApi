@@ -48,7 +48,7 @@ namespace CorporatePortalApi.Controllers.Api
             {
                 APIError apiError = new APIError();
                 apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "Lookup not found";
+                apiError.ErrorMessage = "Lookups not found";
                 return BadRequest(apiError);
             }
             return Ok(entries);
@@ -57,7 +57,7 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPost("addLookup")]
         public async Task<IActionResult> AddLookup(TmX_LookupDto LookupDto)
         {
-            if (await uow.TmX_LookupService.IsTmX_LookupExist(LookupDto.Lookup_Name))
+            if (await uow.TmX_LookupService.IsLookupExist(LookupDto.Lookup_Name))
             {
                 APIError apiError = new APIError();
                 apiError.ErrorCode = BadRequest().StatusCode;
@@ -79,7 +79,7 @@ namespace CorporatePortalApi.Controllers.Api
             APIError apiError = new APIError();
 
          
-           if (await uow.TmX_LookupService.IsTmX_LookupExistInUpdate(LookupDto.Lookup_Name, LookupDto.Lookup_ID))
+           if (await uow.TmX_LookupService.IsLookupExistInUpdate(LookupDto.Lookup_Name, LookupDto.Lookup_ID))
             {
                 apiError.ErrorCode = BadRequest().StatusCode;
                 apiError.ErrorMessage = "Lookup is already exist";

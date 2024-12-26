@@ -35,12 +35,12 @@ namespace CorporatePortalApi.Data.Services
                                            .ToListAsync();
         }
 
-        public async Task<bool> IsTmX_LookupExist(string lookupName)
+        public async Task<bool> IsLookupExist(string lookupName)
         {
             return await dc.TmX_Lookup.AnyAsync(x => x.Lookup_Name == lookupName);
         }
 
-        public async Task<bool> IsTmX_LookupExistInUpdate(string lookupName, int id)
+        public async Task<bool> IsLookupExistInUpdate(string lookupName, int id)
         {
             return await dc.TmX_Lookup.AnyAsync(x => x.Lookup_Name == lookupName && x.Lookup_ID != id);
 
