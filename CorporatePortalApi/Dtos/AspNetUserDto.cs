@@ -1,60 +1,106 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace CorporatePortalApi.Dtos
 {
     public class AspNetUserDto
     {
-        public int? Id { get; set; }
-        public string? Hometown { get; set; }
-
+        // AspNetUser Fields
+        [Required]
+        [MaxLength(256)]
         public string Email { get; set; }
 
-        public bool EmailConfirmed { get; set; }
-
-        public string PasswordHash { get; set; }
-
-        public string SecurityStamp { get; set; }
-
-        public string? PhoneNumber { get; set; }
-
-        public bool PhoneNumberConfirmed { get; set; }
-
-        public bool TwoFactorEnabled { get; set; }
-
-        public DateTime? LockoutEndDateUtc { get; set; }
-
-        public bool LockoutEnabled { get; set; }
-
-        public int AccessFailedCount { get; set; }
-
+        [Required]
+        [MaxLength(256)]
         public string UserName { get; set; }
 
-        public int? Address_ID { get; set; }
-
-        public int? Locale_ID { get; set; }
-
-        public int? Time_Zone_ID { get; set; }
-
-        public int? Tenant_ID { get; set; }
-
-        public DateTime RegistrationDate { get; set; }
-
-        public DateTime PasswordExpiryDate { get; set; }
-
-        public string? Status { get; set; }
-
-        public DateTime? LastLoginDate { get; set; }
-
-        public bool FirstPasswordChange { get; set; }
-
+        [Required]
+        [MaxLength(50)]
         public string FirstName { get; set; }
 
+        [Required]
+        [MaxLength(50)]
         public string LastName { get; set; }
+        public int? Address_ID { get; set; }
+        public string? PasswordHash { get; set; }
+        public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
+        public DateTime PasswordExpiryDate { get; set; }
+        public bool FirstPasswordChange { get; set; } = false;
+        public string SecurityStamp { get; set; }
 
-        public string? ImageURL { get; set; }
+        // TmX_Address Fields
+        [MaxLength(1000)]
+        public string? AddressLine1 { get; set; }
+        [MaxLength(100)]
+        public string? AddressLine2 { get; set; }
 
-        public bool IsTwoFAEnabled { get; set; }
+        [MaxLength(100)]
+        public string? AddressLine3 { get; set; }
 
-        public string? TwoFASecretKey { get; set; }
+        [MaxLength(100)]
+        public string? AddressLine4 { get; set; }
+
+
+        [MaxLength(50)]
+        public string? City { get; set; }
+
+        [MaxLength(50)]
+        public string? Country { get; set; }
+
+        [MaxLength(50)]
+        public string? PostalZipCode { get; set; }
+
+        [Required]
+        public DateTime EffectiveStartDate { get; set; } = DateTime.UtcNow;
+
+        [Required]
+        public DateTime EffectiveEndDate { get; set; } = DateTime.UtcNow.AddYears(1);
+
+        [Required]
+        public bool ActiveFlag { get; set; } = true;
+        public string Created_By { get; set; }
+        public int TenantId { get; set; }
+        public int Tenant_ID { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Tenant_Name { get; set; }
+
+        public DateTime? Tenant_Registration_Date { get; set; }
+
+        public DateTime? Tenant_Activation_Date { get; set; }
+
+        public bool? Tenant_Blocked_Flag { get; set; }
+
+        [Required]
+        public DateTime Effective_Start_Date { get; set; }
+
+        [Required]
+        public DateTime Effective_End_Date { get; set; }
+
+        [Required]
+        public DateTime? Created_Date { get; set; }
+
+        [MaxLength(100)]
+        public string? Last_Updated_By { get; set; }
+
+        public DateTime? Last_Updated_Date { get; set; }
+        public string Language { get; set; }
+
+        [Required]
+        [MaxLength(4)]
+        public string Locale_LCID { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Country_Region { get; set; }
+        public string? Time_Zone_Code { get; set; }
+
+        [MaxLength(100)]
+        public string? Time_Zone_Name { get; set; }
+
+        [MaxLength(100)]
+        public string? Time_Zone_Description { get; set; }
 
     }
 }

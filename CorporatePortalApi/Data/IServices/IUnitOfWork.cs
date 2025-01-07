@@ -4,7 +4,7 @@ namespace CorporatePortalApi.Data.IServices
 {
     public interface IUnitOfWork
     {
-        IAspNetUserService AspNetUsersService { get; }
+        IAspNetUserService AspNetUserService { get; }
         ICorporateService CorporateService { get; }
         IBankService BankService { get; }
         ICurrencyService CurrencyService { get; }
@@ -17,10 +17,7 @@ namespace CorporatePortalApi.Data.IServices
         IProductService ProductService { get; }
         ITmX_UserService TmX_UserService { get; }
         ITmX_User_To_Corporate_MappingService TmX_User_To_Corporate_MappingService { get; }
-
-
         IAspNetRoleService AspNetRoleService { get; }
-
         ITmX_Address_GeographyService TmX_Address_GeographyService { get; }
 
         ITmX_LookupService TmX_LookupService { get; }

@@ -93,6 +93,24 @@ namespace CorporatePortalApi.Data
                 .HasForeignKey(a => a.Address_Type_Lkp_ID)
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
 
+            modelBuilder.Entity<AspNetUser>()
+                .HasOne(u => u.Address)
+                .WithMany()
+                .HasForeignKey(u => u.Address_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasOne(u => u.Locale)
+                .WithMany()
+                .HasForeignKey(u => u.Locale_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasOne(u => u.TimeZone)
+                .WithMany()
+                .HasForeignKey(u => u.Time_Zone_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
 
         // Helper function to parse Point from the WKT string format "POINT (longitude latitude)"

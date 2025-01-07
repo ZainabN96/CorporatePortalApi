@@ -12,7 +12,7 @@ namespace CorporatePortalApi
         {
             this.dc = dc;
         }
-        public IAspNetUserService AspNetUsersService => new AspNetUserService(dc);
+        public IAspNetUserService AspNetUserService => new AspNetUserService(dc);
         public ICorporateService CorporateService => new CorporateService(dc);
         public IBankService BankService => new BankService(dc);
         public ICurrencyService CurrencyService => new CurrencyService(dc);
