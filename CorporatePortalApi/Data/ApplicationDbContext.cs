@@ -79,6 +79,12 @@ namespace CorporatePortalApi.Data
                 .HasOne(a => a.Tenant)
                 .WithMany()
                 .HasForeignKey(a => a.Tenant_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<AspNetUser>()
+                .HasOne(a => a.Tenant)
+                .WithMany()
+                .HasForeignKey(a => a.Tenant_ID)
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
 
             modelBuilder.Entity<TmX_Address>()

@@ -102,7 +102,7 @@ namespace CorporatePortalApi.Data.Services
             user.Time_Zone_ID = time.Time_Zone_ID;
             user.Status = "Active";
             user.RegistrationDate = DateTime.Now;
-
+            user.Locale_ID1=
             dc.AspNetUsers.Add(user);
             dc.SaveChanges();
         }
