@@ -5,8 +5,9 @@ namespace CorporatePortalApi.Dtos
 {
     public class AspNetUserDto
     {
-        // AspNetUser Fields
-        [Required]
+		// AspNetUser Fields
+		public int Id { get; set; }
+		[Required]
         [MaxLength(256)]
         public string Email { get; set; }
 
@@ -86,15 +87,16 @@ namespace CorporatePortalApi.Dtos
 
         public DateTime? Last_Updated_Date { get; set; }
         public string Language { get; set; }
-
-        [Required]
+		public int Locale_ID { get; set; }
+		[Required]
         [MaxLength(4)]
         public string Locale_LCID { get; set; }
 
         [Required]
         [MaxLength(50)]
         public string Country_Region { get; set; }
-        public string? Time_Zone_Code { get; set; }
+		public int Time_Zone_ID { get; set; }
+		public string? Time_Zone_Code { get; set; }
 
         [MaxLength(100)]
         public string? Time_Zone_Name { get; set; }
