@@ -26,9 +26,11 @@ namespace CorporatePortalApi
         public ITmX_UserService TmX_UserService => new TmX_UserService(dc);
         public ITmX_User_To_Corporate_MappingService TmX_User_To_Corporate_MappingService => new TmX_User_To_Corporate_MappingService(dc);
 
-        public IAspNetRoleService AspNetRoleService => new AspNetRoleService(dc);   
+		public ILoan_ApplicationService Loan_ApplicationService => new Loan_ApplicationService(dc);
+		public ILoan_Application_ChecklistService Loan_Application_ChecklistService => new Loan_Application_ChecklistService(dc);
+		public IAspNetRoleService AspNetRoleService => new AspNetRoleService(dc);   
 
-      public ITmX_Address_GeographyService TmX_Address_GeographyService => new TmX_Address_GeographyService(dc);    
+        public ITmX_Address_GeographyService TmX_Address_GeographyService => new TmX_Address_GeographyService(dc);    
 
         public ITmX_LookupService TmX_LookupService => new TmX_LookupService(dc);
 

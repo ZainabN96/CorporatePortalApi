@@ -30,8 +30,21 @@ namespace CorporatePortalApi.Data
 
         public DbSet<AspNetRole>  AspNetRole { get; set; }
 
+		public DbSet<TmX_Loan_Application_Checklist> TmX_Loan_Application_Checklist { get; set; }
+		public DbSet<TmX_Tab> TmX_Tab { get; set; }
+        public DbSet<TmX_Account_Application> TmX_Account_Application { get; set; }
+		public DbSet<TmX_Product_Checklist> TmX_Product_Checklist { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		public DbSet<TmX_Loan_Application> TmX_Loan_Application { get; set; }
+		public DbSet<TmX_Company_Branch> TmX_Company_Branch { get; set; }
+		public DbSet<TmX_Geofence> TmX_Geofence { get; set; }
+		public DbSet<TmX_Customer_Master> TmX_Customer_Master { get; set; }
+		public DbSet<TmX_Order> TmX_Order { get; set; }
+
+		public DbSet<TmX_Transaction> TmX_Transaction { get; set; }
+		public DbSet<TmX_Institute> TmX_Institute { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 

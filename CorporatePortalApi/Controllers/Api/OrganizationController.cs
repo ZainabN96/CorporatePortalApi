@@ -9,7 +9,7 @@ namespace CorporatePortalApi.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrganizationController : ControllerBase
+    public class OrganizationController : Controller
     {
         private IUnitOfWork uow;
         private readonly IMapper mapper;

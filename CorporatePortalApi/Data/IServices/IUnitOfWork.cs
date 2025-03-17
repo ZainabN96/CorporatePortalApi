@@ -22,6 +22,9 @@ namespace CorporatePortalApi.Data.IServices
 
         ITmX_LookupService TmX_LookupService { get; }
 
-        Task<bool> SaveAsync();
+		ILoan_ApplicationService Loan_ApplicationService { get; }
+		ILoan_Application_ChecklistService Loan_Application_ChecklistService { get; }
+
+		Task<bool> SaveAsync();
     }
 }
