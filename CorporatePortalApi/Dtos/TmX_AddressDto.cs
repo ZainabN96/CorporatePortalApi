@@ -4,13 +4,11 @@ using NetTopologySuite.Geometries;
 
 namespace CorporatePortalApi.Dtos
 {
-    public class TmX_AddressDto
-    {
+    public class TmX_AddressDto: BaseDto
+	{
         public int Address_ID { get; set; }
         public string Created_By { get; set; }
-        public DateTime Created_Date { get; set; }
         public string? Last_Updated_By { get; set; }
-        public DateTime? Last_Updated_Date { get; set; }
         public int? Address_Geography_ID { get; set; }
         public int Tenant_ID { get; set; }
         public string? UDF_Data { get; set; }

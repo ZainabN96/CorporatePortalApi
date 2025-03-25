@@ -1,4 +1,5 @@
 ﻿using CorporatePortalApi.Data.IServices;
+using CorporatePortalApi.Helper;
 using CorporatePortalApi.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +15,7 @@ namespace CorporatePortalApi.Data.Services
         }
         public TmX_Corporate Add(TmX_Corporate Organization)
         {
-            Organization.Last_Updated_Date = DateTime.Now;
             dc.TmX_Corporate.Add(Organization);
-
             return Organization;
         }
 

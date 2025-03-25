@@ -2,6 +2,7 @@
 using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Dtos;
 using CorporatePortalApi.Errors;
+using CorporatePortalApi.Helper;
 using CorporatePortalApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,10 +28,7 @@ namespace CorporatePortalApi.Controllers.Api
 
 			if (entry == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Tenant not found";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			return Ok(entry);
@@ -50,10 +48,10 @@ namespace CorporatePortalApi.Controllers.Api
 		{
 			if (await uow.TenantService.IsTenantExist(TenantDto.Tenant_Name))
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Tenant is already exist";
-				return BadRequest(apiError);
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Tenant already exists",
+						$"The Tenant '{TenantDto.Tenant_Name}' is already registered."
+				 ));
 			}
 
 			var tenant = mapper.Map<TmX_Tenant>(TenantDto);
@@ -67,27 +65,24 @@ namespace CorporatePortalApi.Controllers.Api
 		[HttpPut("updateTenant")]
 		public async Task<IActionResult> UpdateTenant(TmX_TenantDto TenantDto)
 		{
-			APIError apiError = new APIError();
-
 			if (await uow.TenantService.IsTenantExistInUpdate(TenantDto.Tenant_Name, TenantDto.Tenant_ID))
 			{
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Tenant already exists.";
-				return BadRequest(apiError);
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Tenant already exists",
+						$"The Tenant '{TenantDto.Tenant_Name}' is already registered with ID {TenantDto.Tenant_ID}."
+				 ));
 			}
 
 			var TenantFromDb = await uow.TenantService.Get(TenantDto.Tenant_ID);
 
 			if (TenantFromDb == null)
 			{
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Tenant not found!";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			mapper.Map(TenantDto, TenantFromDb);
 
-			TenantDto.Last_Updated_Date = DateTime.Now;
+			UHelper.UpdateTimestamp(TenantDto);
 			TenantFromDb.Tenant_Blocked_Flag = false;
 
 			await uow.SaveAsync();
@@ -101,15 +96,11 @@ namespace CorporatePortalApi.Controllers.Api
 
 			if (TenantFromDb == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Tenant not found!";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
-			TenantFromDb.Active_Flag = false;
 			TenantFromDb.Tenant_Blocked_Flag = true;
-			TenantFromDb.Last_Updated_Date = DateTime.Now;
+			UHelper.SoftDelete(TenantFromDb);
 
 			await uow.SaveAsync();
 

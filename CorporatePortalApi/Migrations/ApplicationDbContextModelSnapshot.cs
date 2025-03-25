@@ -41,7 +41,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AspNetRole");
+                    b.ToTable("AspNetRole", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.AspNetUser", b =>
@@ -151,7 +151,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Time_Zone_ID");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.AspNetUserRole", b =>
@@ -170,7 +170,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Account_Application", b =>
@@ -193,7 +193,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Account_Application_ID");
 
-                    b.ToTable("TmX_Account_Application");
+                    b.ToTable("TmX_Account_Application", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Address", b =>
@@ -286,7 +286,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Tenant_ID");
 
-                    b.ToTable("TmX_Address");
+                    b.ToTable("TmX_Address", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Address_Geography", b =>
@@ -345,7 +345,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Address_Geography_ID");
 
-                    b.ToTable("TmX_Address_Geography");
+                    b.ToTable("TmX_Address_Geography", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Bank", b =>
@@ -439,7 +439,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Bank_ID");
 
-                    b.ToTable("TmX_Bank");
+                    b.ToTable("TmX_Bank", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Company_Branch", b =>
@@ -467,7 +467,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Customer_Branch_Id");
 
-                    b.ToTable("TmX_Company_Branch");
+                    b.ToTable("TmX_Company_Branch", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Corporate", b =>
@@ -547,7 +547,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Default_Product_Id");
 
-                    b.ToTable("TmX_Corporate");
+                    b.ToTable("TmX_Corporate", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Currency", b =>
@@ -597,7 +597,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Currency_ID");
 
-                    b.ToTable("TmX_Currency");
+                    b.ToTable("TmX_Currency", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Customer_Master", b =>
@@ -745,7 +745,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Transaction_Id");
 
-                    b.ToTable("TmX_Customer_Master");
+                    b.ToTable("TmX_Customer_Master", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Geofence", b =>
@@ -766,7 +766,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Geofence_Id");
 
-                    b.ToTable("TmX_Geofence");
+                    b.ToTable("TmX_Geofence", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Institute", b =>
@@ -787,7 +787,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Institute_ID");
 
-                    b.ToTable("TmX_Institute");
+                    b.ToTable("TmX_Institute", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Loan_Application", b =>
@@ -1010,7 +1010,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("User_Id");
 
-                    b.ToTable("TmX_Loan_Application");
+                    b.ToTable("TmX_Loan_Application", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Loan_Application_Checklist", b =>
@@ -1110,7 +1110,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("User_ID");
 
-                    b.ToTable("TmX_Loan_Application_Checklist");
+                    b.ToTable("TmX_Loan_Application_Checklist", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Locale", b =>
@@ -1138,7 +1138,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Locale_ID");
 
-                    b.ToTable("TmX_Locale");
+                    b.ToTable("TmX_Locale", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Location", b =>
@@ -1199,7 +1199,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Tenant_ID");
 
-                    b.ToTable("TmX_Location");
+                    b.ToTable("TmX_Location", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Lookup", b =>
@@ -1272,7 +1272,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Lookup_ID");
 
-                    b.ToTable("TmX_Lookup");
+                    b.ToTable("TmX_Lookup", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Order", b =>
@@ -1392,7 +1392,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Tenant_ID");
 
-                    b.ToTable("TmX_Order");
+                    b.ToTable("TmX_Order", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Product", b =>
@@ -1535,7 +1535,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Tenant_ID");
 
-                    b.ToTable("TmX_Product");
+                    b.ToTable("TmX_Product", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Product_Checklist", b =>
@@ -1555,7 +1555,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Product_Checklist_Id");
 
-                    b.ToTable("TmX_Product_Checklist");
+                    b.ToTable("TmX_Product_Checklist", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Tab", b =>
@@ -1576,7 +1576,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Tab_Id");
 
-                    b.ToTable("TmX_Tab");
+                    b.ToTable("TmX_Tab", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Tenant", b =>
@@ -1627,7 +1627,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Tenant_ID");
 
-                    b.ToTable("TmX_Tenants");
+                    b.ToTable("TmX_Tenants", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Time_Zone", b =>
@@ -1670,7 +1670,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Time_Zone_ID");
 
-                    b.ToTable("TmX_Time_Zone");
+                    b.ToTable("TmX_Time_Zone", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Transaction", b =>
@@ -1697,7 +1697,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Transaction_Id");
 
-                    b.ToTable("TmX_Transaction");
+                    b.ToTable("TmX_Transaction", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_User", b =>
@@ -1826,7 +1826,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("User_Type_Lkp_ID");
 
-                    b.ToTable("TmX_User");
+                    b.ToTable("TmX_User", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_User_To_Corporate_Mapping", b =>
@@ -1876,7 +1876,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("User_Id");
 
-                    b.ToTable("TmX_User_To_Corporate_Mapping");
+                    b.ToTable("TmX_User_To_Corporate_Mapping", (string)null);
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.AspNetUser", b =>

@@ -2,7 +2,7 @@
 
 namespace CorporatePortalApi.Dtos
 {
-	public class TmX_Customer_MasterDto
+	public class TmX_Customer_MasterDto: BaseDto
 	{
 		public int Customer_Master_Id { get; set; }
 		public string? Customer_Code { get; set; }
@@ -13,9 +13,7 @@ namespace CorporatePortalApi.Dtos
 		public DateTime? Effective_Start_Date { get; set; }
 		public DateTime? Effective_End_Date { get; set; }
 		public string Created_By { get; set; }
-		public DateTime Created_Date { get; set; }
 		public string? Last_Updated_By { get; set; }
-		public DateTime? Last_Updated_Date { get; set; }
 		public int Tenant_Id { get; set; }
 		public int? Location_Id { get; set; }
 		public string? Multi_Site_Customer_Flag { get; set; }

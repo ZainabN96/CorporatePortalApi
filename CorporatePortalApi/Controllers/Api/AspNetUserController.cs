@@ -27,10 +27,7 @@ namespace CorporatePortalApi.Controllers.Api
 
 			if (entry == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "AspNetUser not found!";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			return Ok(entry);
@@ -50,13 +47,11 @@ namespace CorporatePortalApi.Controllers.Api
             // Check if the user already exists
             if (await uow.AspNetUserService.IsUserExist(userDto.Email))
             {
-                APIError apiError = new APIError
-                {
-                    ErrorCode = BadRequest().StatusCode,
-                    ErrorMessage = "User with this email already exists"
-                };
-                return BadRequest(apiError);
-            }
+				return BadRequest(ErrorCodes.BadRequestError(
+						"NetUser already exists",
+						$"The email: '{userDto.Email}' is already registered."
+				));
+			}
 
             var user = mapper.Map<AspNetUser>(userDto);
             var address = mapper.Map<TmX_Address>(userDto);
@@ -94,12 +89,7 @@ namespace CorporatePortalApi.Controllers.Api
 
 			if (userFromDb == null)
 			{
-				APIError apiError = new APIError
-				{
-					ErrorCode = NoContent().StatusCode,
-					ErrorMessage = "User not found"
-				};
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			try
@@ -112,11 +102,7 @@ namespace CorporatePortalApi.Controllers.Api
 			}
 			catch (Exception ex)
 			{
-				return StatusCode(500, new APIError
-				{
-					ErrorCode = 500,
-					ErrorMessage = ex.Message
-				});
+				return StatusCode(500, ErrorCodes.ServerError(ex.Message));
 			}
 		}
 	}

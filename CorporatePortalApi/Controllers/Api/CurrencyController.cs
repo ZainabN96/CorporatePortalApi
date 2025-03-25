@@ -2,6 +2,7 @@
 using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Dtos;
 using CorporatePortalApi.Errors;
+using CorporatePortalApi.Helper;
 using CorporatePortalApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,10 +28,7 @@ namespace CorporatePortalApi.Controllers.Api
 
 			if (entry == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Currency not found";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			return Ok(entry);
@@ -40,7 +38,6 @@ namespace CorporatePortalApi.Controllers.Api
 		public async Task<IActionResult> GetAll()
 		{
 			var entries = await uow.CurrencyService.GetAllCurrencyAsync();
-
 			return Ok(entries);
 		}
 
@@ -49,10 +46,10 @@ namespace CorporatePortalApi.Controllers.Api
 		{
 			if (await uow.CurrencyService.IsCurrencyExist(CurrencyDto.Currency_Symbol))
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Currency is already exist";
-				return BadRequest(apiError);
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Currency already exists",
+						$"The currency '{CurrencyDto.Currency_Symbol}' is already registered."
+				));
 			}
 
 			var currency = mapper.Map<TmX_Currency>(CurrencyDto);
@@ -65,27 +62,23 @@ namespace CorporatePortalApi.Controllers.Api
 		[HttpPut("updateCurrency")]
 		public async Task<IActionResult> UpdateCurrency(TmX_CurrencyDto CurrencyDto)
 		{
-			APIError apiError = new APIError();
-
 			if (await uow.CurrencyService.IsCurrencyExistInUpdate(CurrencyDto.Currency_Symbol, CurrencyDto.Currency_ID))
 			{
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Currency already exists.";
-				return BadRequest(apiError);
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Currency already exists",
+						$"The currency '{CurrencyDto.Currency_Symbol}' is already registered with ID {CurrencyDto.Currency_ID}."
+				));
 			}
 
 			var CurrencyFromDb = await uow.CurrencyService.Get(CurrencyDto.Currency_ID);
 
 			if (CurrencyFromDb == null)
 			{
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Currency not found!";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			mapper.Map(CurrencyDto, CurrencyFromDb);
-
-			CurrencyDto.Last_Updated_Date = DateTime.Now;
+			UHelper.UpdateTimestamp(CurrencyDto);
 
 			await uow.SaveAsync();
 			return Ok(CurrencyDto);
@@ -97,17 +90,12 @@ namespace CorporatePortalApi.Controllers.Api
 
 			if (CurrencyFromDb == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Currency not found!";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
-			CurrencyFromDb.Active_Flag = false;
-			CurrencyFromDb.Last_Updated_Date = DateTime.Now;
+			UHelper.SoftDelete(CurrencyFromDb);
 
 			await uow.SaveAsync();
-
 			return Ok(deleteKeyPairDto);
 		}
 

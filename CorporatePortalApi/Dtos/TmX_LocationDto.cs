@@ -2,8 +2,8 @@
 
 namespace CorporatePortalApi.Dtos
 {
-    public class TmX_LocationDto
-    {
+    public class TmX_LocationDto: BaseDto
+	{
         public int Location_ID { get; set; }
         public int? Parent_Location_ID { get; set; }
         public int Tenant_ID { get; set; }
@@ -13,9 +13,7 @@ namespace CorporatePortalApi.Dtos
         public DateTime Effective_Start_Date { get; set; }
         public DateTime Effective_End_Date { get; set; }
         public string Created_By { get; set; }
-        public DateTime Created_Date { get; set; }
         public string? Last_Updated_By { get; set; }
-        public DateTime? Last_Updated_Date { get; set; }
         public int Location_Type_Lkp_ID { get; set; }
     }
 }

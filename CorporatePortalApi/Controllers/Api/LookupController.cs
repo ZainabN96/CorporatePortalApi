@@ -2,6 +2,7 @@
 using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Dtos;
 using CorporatePortalApi.Errors;
+using CorporatePortalApi.Helper;
 using CorporatePortalApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace CorporatePortalApi.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LookupController : ControllerBase
+    public class LookupController : Controller
     {
 
         private IUnitOfWork uow;
@@ -31,11 +32,8 @@ namespace CorporatePortalApi.Controllers.Api
 
             if (entry == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "Lookup not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             return Ok(entry);
         }
@@ -46,11 +44,8 @@ namespace CorporatePortalApi.Controllers.Api
             var entries = await uow.TmX_LookupService.GetAllLookupAsync();
             if (entries == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "Lookups not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
             return Ok(entries);
         }
 
@@ -59,11 +54,11 @@ namespace CorporatePortalApi.Controllers.Api
         {
             if (await uow.TmX_LookupService.IsLookupExist(LookupDto.Lookup_Name))
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Lookup is already exist";
-                return BadRequest(apiError);
-            }
+				return BadRequest(ErrorCodes.BadRequestError(
+						 "Lookup already exists",
+						 $"The Lookup '{LookupDto.Lookup_Name}' is already registered."
+				  ));
+			}
 
             var lookup = mapper.Map<TmX_Lookup>(LookupDto);
 
@@ -76,30 +71,26 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPut("updateLookup")]
         public async Task<IActionResult> UpdateLookup(TmX_LookupDto LookupDto)
         {
-            APIError apiError = new APIError();
-
-         
            if (await uow.TmX_LookupService.IsLookupExistInUpdate(LookupDto.Lookup_Name, LookupDto.Lookup_ID))
             {
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Lookup is already exist";
-                return BadRequest(apiError);
-            }
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Lookup already exists",
+						$"The Lookup '{LookupDto.Lookup_Name}' is already registered with ID {LookupDto.Lookup_ID}."
+				 ));
+			}
 
             var LookupFromDb = await uow.TmX_LookupService.Get(LookupDto.Lookup_ID);
 
             if (LookupFromDb == null)
             {
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Lookup not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             mapper.Map(LookupDto, LookupFromDb);
 
-            LookupDto.Last_Updated_Date = DateTime.Now;
+			UHelper.UpdateTimestamp(LookupDto);
 
-            await uow.SaveAsync();
+			await uow.SaveAsync();
             return Ok(LookupDto);
         }
 
@@ -112,16 +103,12 @@ namespace CorporatePortalApi.Controllers.Api
 
             if (LookupFromDb == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "Lookup not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
-            LookupFromDb.Active_Flag = false;
-            LookupFromDb.Last_Updated_Date = DateTime.Now;
+			UHelper.SoftDelete(LookupFromDb);
 
-            await uow.SaveAsync();
+			await uow.SaveAsync();
 
             return Ok(deleteKeyPairDto);
         }

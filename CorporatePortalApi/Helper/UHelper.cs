@@ -1,4 +1,5 @@
-﻿using CorporatePortalApi.Models;
+﻿using CorporatePortalApi.Dtos;
+using CorporatePortalApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -76,5 +77,46 @@ namespace CorporatePortalApi.Helper
 
             return extension;
         }
-    }
+        /* Generic Methods for Common Properties */
+        public static void SoftDelete<T>(T entity) where T : class
+		{
+			var activeFlagProperty = entity.GetType().GetProperty("Active_Flag");
+			var lastUpdatedProperty = entity.GetType().GetProperty("Last_Updated_Date");
+
+			if (activeFlagProperty != null && lastUpdatedProperty != null)
+			{
+				activeFlagProperty.SetValue(entity, false);
+				lastUpdatedProperty.SetValue(entity, DateTime.UtcNow);
+			}
+		}
+
+		public static void UpdateTimestamp<T>(T entity) where T : BaseDto
+		{
+			var lastUpdatedProperty = entity.GetType().GetProperty("Last_Updated_Date");
+
+			if (lastUpdatedProperty != null)
+			{
+				lastUpdatedProperty.SetValue(entity, DateTime.UtcNow);
+			}
+			
+		}
+
+		public static void UpdateActiveStatus<T>(T entity) where T : class
+		{
+			var entityType = entity.GetType();
+
+			var activeFlagProperty = entityType.GetProperty("Active_Flag");
+			var isActiveProperty = entityType.GetProperty("Is_Active");
+
+			if (activeFlagProperty != null)
+			{
+				activeFlagProperty.SetValue(entity, true);
+			}
+			else if (isActiveProperty != null)
+			{
+				isActiveProperty.SetValue(entity, true);
+			}
+		}
+	}
 }
+

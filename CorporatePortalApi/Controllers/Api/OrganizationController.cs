@@ -2,6 +2,7 @@
 using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Dtos;
 using CorporatePortalApi.Errors;
+using CorporatePortalApi.Helper;
 using CorporatePortalApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,11 +28,8 @@ namespace CorporatePortalApi.Controllers.Api
 
             if (entry == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "TmX_Corporate not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             return Ok(entry);
         }
@@ -49,11 +47,11 @@ namespace CorporatePortalApi.Controllers.Api
         {
             if (await uow.CorporateService.IsCorporateExist(OrganizationDto.Corporate_Name))
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Organization is already exist";
-                return BadRequest(apiError);
-            }
+				return BadRequest(ErrorCodes.BadRequestError(
+					   "Organization already exists",
+					   $"The organization '{OrganizationDto.Corporate_Name}' is already registered."
+				));
+			}
 
             var org = mapper.Map<TmX_Corporate>(OrganizationDto);
             
@@ -63,34 +61,32 @@ namespace CorporatePortalApi.Controllers.Api
             return Ok(org);
         }
 
-        [HttpPut("updateOrganization")]
+
+		[HttpPut("updateOrganization")]
         public async Task<IActionResult> UpdateOrganization(TmX_CorporateDto OrganizationDto)
         {
-            APIError apiError = new APIError();
-
             if (await uow.CorporateService.IsCorporateExistInUpdate(OrganizationDto.Corporate_Name, OrganizationDto.Corporate_Id))
             {
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Organization is already exist";
-                return BadRequest(apiError);
-            }
+				return BadRequest(ErrorCodes.BadRequestError(
+	                   "Organization already exists",
+	                   $"The organization '{OrganizationDto.Corporate_Name}' is already registered with ID {OrganizationDto.Corporate_Id}."
+                ));
+			}
 
             var OrganizationFromDb = await uow.CorporateService.Get(OrganizationDto.Corporate_Id);
 
             if (OrganizationFromDb == null)
             {
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Corporate not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             mapper.Map(OrganizationDto, OrganizationFromDb);
-            
-            OrganizationDto.Last_Updated_Date = DateTime.Now;
+			UHelper.UpdateTimestamp(OrganizationDto);
             
             await uow.SaveAsync();
             return Ok(OrganizationDto);
         }
+
         [HttpPost("deleteOrgianization")]
         public async Task<IActionResult> DeleteOrgianization(DeleteKeyPairDto deleteKeyPairDto)
         {
@@ -98,16 +94,12 @@ namespace CorporatePortalApi.Controllers.Api
 
             if (OrgFromDb == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "Orgianization not found";
-                return BadRequest(apiError);
+                return NotFound(ErrorCodes.NotFound());
             }
 
-            OrgFromDb.Active_Flag = false;
-            OrgFromDb.Last_Updated_Date = DateTime.Now;
+			UHelper.SoftDelete(OrgFromDb);
 
-            await uow.SaveAsync();
+			await uow.SaveAsync();
 
             return Ok(deleteKeyPairDto);
         }

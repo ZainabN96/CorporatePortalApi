@@ -31,6 +31,7 @@ namespace CorporatePortalApi.Helper
                     .ForMember(dest => dest.Tenant_ID, opt => opt.MapFrom(src => src.TenantId));
                 cfg.CreateMap<AspNetUserDto, TmX_Time_Zone>().ReverseMap();
                 cfg.CreateMap<AspNetUserDto, TmX_Locale>().ReverseMap();
+				cfg.CreateMap<TmX_User, TmX_UserDto>().ReverseMap();
 				cfg.CreateMap<TmX_Loan_Application, TmX_Loan_ApplicationDto>().ReverseMap();
 				cfg.CreateMap<TmX_Loan_Application_Checklist, TmX_Loan_Application_ChecklistDto>().ReverseMap();
 			});

@@ -10,7 +10,7 @@ namespace CorporatePortalApi.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AspNetUserRoleController : ControllerBase
+    public class AspNetUserRoleController : Controller
     {
 
         private IUnitOfWork uow;
@@ -29,11 +29,8 @@ namespace CorporatePortalApi.Controllers.Api
 
             if (entry == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "AspNetUserRole not found!";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             return Ok(entry);
         }
@@ -45,11 +42,8 @@ namespace CorporatePortalApi.Controllers.Api
 
             if (entry == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "AspNetUserRole not found for this UserId!";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             return Ok(entry);
         }
@@ -62,11 +56,8 @@ namespace CorporatePortalApi.Controllers.Api
 
             if (entry == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "AspNetUserRole not found for this RoleId!";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             return Ok(entry);
         }
@@ -85,11 +76,11 @@ namespace CorporatePortalApi.Controllers.Api
         {
             if (await uow.AspNetUserRolesService.IsAspNetUserRoleExist(userRoleDto.RoleId))
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "UserRole is already exist";
-                return BadRequest(apiError);
-            }
+				return BadRequest(ErrorCodes.BadRequestError(
+						"User Role already exists",
+						$"The User Role is already registered with ID {userRoleDto.RoleId}."
+				));
+			}
 
            var userRole = mapper.Map<AspNetUserRole>(userRoleDto);
              
@@ -98,9 +89,5 @@ namespace CorporatePortalApi.Controllers.Api
             await uow.SaveAsync();
             return Ok(userRole);
         }
-
-
-
-
     }
 }

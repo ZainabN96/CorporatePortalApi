@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using CorporatePortalApi.Errors;
+using System.Text.Json;
 
 namespace CorporatePortalApi.Errors
 {
@@ -26,3 +27,5 @@ namespace CorporatePortalApi.Errors
         }
     }
 }
+
+

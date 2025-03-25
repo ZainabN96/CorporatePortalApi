@@ -2,8 +2,8 @@
 
 namespace CorporatePortalApi.Dtos
 {
-    public class TmX_Address_GeographyDto
-    {
+    public class TmX_Address_GeographyDto: BaseDto
+	{
         public int Address_Geography_ID { get; set; }
         public int? Parent_Geography_ID { get; set; }
 
@@ -19,11 +19,7 @@ namespace CorporatePortalApi.Dtos
 
         public string Created_By { get; set; }
 
-        public DateTime Created_Date { get; set; }
-
         public string? Last_Updated_By { get; set; }
-
-        public DateTime? Last_Updated_Date { get; set; }
 
         public int Tenant_ID { get; set; }
 

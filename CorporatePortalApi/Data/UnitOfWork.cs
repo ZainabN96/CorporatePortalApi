@@ -23,7 +23,7 @@ namespace CorporatePortalApi
         public ITmX_Time_ZoneService TmX_Time_ZoneService => new TmX_Time_ZoneService(dc);
         public IAspNetUserRoleService AspNetUserRolesService => new AspNetUserRoleService(dc);
         public IProductService ProductService => new ProductService(dc);
-        public ITmX_UserService TmX_UserService => new TmX_UserService(dc);
+        public IUserService UserService => new UserService(dc);
         public ITmX_User_To_Corporate_MappingService TmX_User_To_Corporate_MappingService => new TmX_User_To_Corporate_MappingService(dc);
 
 		public ILoan_ApplicationService Loan_ApplicationService => new Loan_ApplicationService(dc);

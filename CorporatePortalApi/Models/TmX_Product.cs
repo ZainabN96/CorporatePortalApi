@@ -28,11 +28,14 @@ namespace CorporatePortalApi.Models
 
         public int? Repayment_Frequency_Lkp { get; set; }
 
-        public decimal? Documentation_Fee { get; set; }
+		[Column(TypeName = "numeric(9,4)")]
+		public decimal? Documentation_Fee { get; set; }
 
-        public decimal? Service_Fee { get; set; }
+		[Column(TypeName = "numeric(9,4)")]
+		public decimal? Service_Fee { get; set; }
 
-        public decimal? Processing_Fee { get; set; }
+		[Column(TypeName = "numeric(9,4)")]
+		public decimal? Processing_Fee { get; set; }
 
         public int Currency_ID { get; set; }
 
@@ -71,7 +74,8 @@ namespace CorporatePortalApi.Models
 
         public string Shortlisting_Rules_Lookup { get; set; }
 
-        public decimal? Max_Allowed_Loan_Limit { get; set; }
+		[Column(TypeName = "decimal(18,0)")]
+		public decimal? Max_Allowed_Loan_Limit { get; set; }
 
         public int? Max_Sub_Product_Count { get; set; }
 

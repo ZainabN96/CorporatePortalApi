@@ -2,6 +2,7 @@
 using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Dtos;
 using CorporatePortalApi.Errors;
+using CorporatePortalApi.Helper;
 using CorporatePortalApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,11 +29,8 @@ namespace CorporatePortalApi.Controllers.Api
 
             if (entry == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "Bank not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             return Ok(entry);
         }
@@ -43,11 +41,8 @@ namespace CorporatePortalApi.Controllers.Api
             var entries = await uow.BankService.GetAllBankAsync();
             if (entries == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "Bank not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
             return Ok(entries);
         }
 
@@ -56,11 +51,11 @@ namespace CorporatePortalApi.Controllers.Api
         {
             if (await uow.BankService.IsBankExist(BankDto.Bank_Name))
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Bank is already exist";
-                return BadRequest(apiError);
-            }
+				return BadRequest(ErrorCodes.BadRequestError(
+						 "Bank already exists",
+						 $"The bank '{BankDto.Bank_Name}' is already registered."
+				  ));
+			}
 
             var bank = mapper.Map<TmX_Bank>(BankDto);
 
@@ -73,29 +68,26 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPut("updateBank")]
         public async Task<IActionResult> UpdateBank(TmX_BankDto BankDto)
         {
-            APIError apiError = new APIError();
-
             if (await uow.BankService.IsBankExistInUpdate(BankDto.Bank_Name, BankDto.Bank_ID))
             {
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Bank is already exist";
-                return BadRequest(apiError);
-            }
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Bank already exists",
+						$"The bank '{BankDto.Bank_Name}' is already registered with ID {BankDto.Bank_ID}."
+				 ));
+			}
 
             var BankFromDb = await uow.BankService.Get(BankDto.Bank_ID);
 
             if (BankFromDb == null)
             {
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Bank not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             mapper.Map(BankDto, BankFromDb);
 
-            BankDto.Last_Updated_Date = DateTime.Now;
+			UHelper.UpdateTimestamp(BankDto);
 
-            await uow.SaveAsync();
+			await uow.SaveAsync();
             return Ok(BankDto);
         }
 
@@ -106,11 +98,8 @@ namespace CorporatePortalApi.Controllers.Api
 
             if (ProFromDb == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "Bank not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             ProFromDb.Is_Active = false;
             ProFromDb.Last_Updated_Date = DateTime.Now;

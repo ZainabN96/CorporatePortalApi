@@ -1,13 +1,11 @@
 ﻿namespace CorporatePortalApi.Dtos
 {
-    public class TmX_BankDto
-    {
+    public class TmX_BankDto: BaseDto
+	{
         public int Bank_ID { get; set; }
         public string? Bank_Name { get; set; }
         public string Created_By { get; set; }
-        public DateTime Created_Date { get; set; }
         public string? Last_Updated_By { get; set; }
-        public DateTime? Last_Updated_Date { get; set; }
         public string? Bank_API_Url { get; set; }
         public string? Admin_Username { get; set; }
         public string? Admin_Password { get; set; }

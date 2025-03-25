@@ -2,8 +2,8 @@
 
 namespace CorporatePortalApi.Dtos
 {
-    public class TmX_LookupDto
-    {
+    public class TmX_LookupDto: BaseDto
+	{
 
         public int Lookup_ID { get; set; }
 
@@ -32,8 +32,6 @@ namespace CorporatePortalApi.Dtos
         public string? Created_Date { get; set; } // in script the datatype was nvarchar
 
         public string? Last_Updated_By { get; set; }
-
-        public DateTime? Last_Updated_Date { get; set; }
 
         public string? Locale_Label { get; set; }
 

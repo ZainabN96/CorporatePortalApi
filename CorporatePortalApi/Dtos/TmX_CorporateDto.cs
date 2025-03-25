@@ -1,6 +1,6 @@
 ﻿namespace CorporatePortalApi.Dtos
 {
-    public class TmX_CorporateDto
+    public class TmX_CorporateDto: BaseDto
     {
         public int Corporate_Id { get; set; }
         public string Corporate_Name { get; set; }
@@ -15,8 +15,6 @@
         public int? Default_Product_Id { get; set; }
         public bool Active_Flag { get; set; }
         public string Created_By { get; set; }
-        public DateTime Created_Date { get; set; }
-        public string? Last_Updated_By { get; set; }
-        public DateTime? Last_Updated_Date { get; set; }
+		public string? Last_Updated_By { get; set; }
     }
 }

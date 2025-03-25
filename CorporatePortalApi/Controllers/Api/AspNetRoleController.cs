@@ -27,10 +27,7 @@ namespace CorporatePortalApi.Controllers.Api
 
 			if (entry == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Role not found";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			return Ok(entry);
@@ -50,10 +47,10 @@ namespace CorporatePortalApi.Controllers.Api
 		{
 			if (await uow.AspNetRoleService.IsRoleExist(RoleDto.Name))
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Role is already exist";
-				return BadRequest(apiError);
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Role already exists",
+						$"The role '{RoleDto.Name}' is already registered."
+				));
 			}
 
 			var role = mapper.Map<AspNetRole>(RoleDto);
@@ -67,22 +64,19 @@ namespace CorporatePortalApi.Controllers.Api
 		[HttpPut("updateRole")]
 		public async Task<IActionResult> UpdateRole(AspNetRoleDto RoleDto)
 		{
-			APIError apiError = new APIError();
-
 			if (await uow.AspNetRoleService.IsRoleExistInUpdate(RoleDto.Name, RoleDto.Id))
 			{
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Role already exists.";
-				return BadRequest(apiError);
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Role already exists",
+						$"The role '{RoleDto.Name}' is already registered with ID {RoleDto.Id}."
+				));
 			}
 
 			var RoleFromDb = await uow.AspNetRoleService.Get(RoleDto.Id);
 
 			if (RoleFromDb == null)
 			{
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Role not found!";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			mapper.Map(RoleDto, RoleFromDb);
@@ -98,10 +92,7 @@ namespace CorporatePortalApi.Controllers.Api
 
 			if (RoleFromDb == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Role not found!";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			await uow.SaveAsync();

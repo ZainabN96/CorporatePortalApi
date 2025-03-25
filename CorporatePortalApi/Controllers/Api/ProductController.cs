@@ -2,6 +2,7 @@
 using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Dtos;
 using CorporatePortalApi.Errors;
+using CorporatePortalApi.Helper;
 using CorporatePortalApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,11 +28,8 @@ namespace CorporatePortalApi.Controllers.Api
 
             if (entry == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "Product not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             return Ok(entry);
         }
@@ -49,11 +47,11 @@ namespace CorporatePortalApi.Controllers.Api
         {
             if (await uow.ProductService.IsProductExist(Product.Product_Name))
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Product is already exist";
-                return BadRequest(apiError);
-            }
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Product already exists",
+						$"The Product '{Product.Product_Name}' is already registered."
+				 ));
+			}
 
             var pro = mapper.Map<TmX_Product>(Product);
 
@@ -66,29 +64,25 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPut("updateProduct")]
         public async Task<IActionResult> UpdateProduct(TmX_ProductDto ProductDto)
         {
-            APIError apiError = new APIError();
-
             if (await uow.ProductService.IsProductExistInUpdate(ProductDto.Product_Name, ProductDto.Product_ID))
             {
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Product is already exist";
-                return BadRequest(apiError);
-            }
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Product already exists",
+						$"The Product '{ProductDto.Product_Name}' is already registered with ID {ProductDto.Product_ID}."
+				 ));
+			}
 
             var ProductFromDb = await uow.ProductService.Get(ProductDto.Product_ID);
 
             if (ProductFromDb == null)
             {
-                apiError.ErrorCode = BadRequest().StatusCode;
-                apiError.ErrorMessage = "Product not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
             mapper.Map(ProductDto, ProductFromDb);
 
-            ProductDto.Last_Updated_Date = DateTime.Now;
-
-            await uow.SaveAsync();
+			UHelper.UpdateTimestamp(ProductDto);
+			await uow.SaveAsync();
             return Ok(ProductDto);
         }
 
@@ -99,16 +93,12 @@ namespace CorporatePortalApi.Controllers.Api
 
             if (ProFromDb == null)
             {
-                APIError apiError = new APIError();
-                apiError.ErrorCode = NoContent().StatusCode;
-                apiError.ErrorMessage = "Product not found";
-                return BadRequest(apiError);
-            }
+				return NotFound(ErrorCodes.NotFound());
+			}
 
-            ProFromDb.Active_Flag = false;
-            ProFromDb.Last_Updated_Date = DateTime.Now;
+			UHelper.SoftDelete(ProFromDb);
 
-            await uow.SaveAsync();
+			await uow.SaveAsync();
 
             return Ok(deleteKeyPairDto);
         }
