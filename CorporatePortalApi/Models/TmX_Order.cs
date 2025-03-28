@@ -13,7 +13,7 @@ namespace CorporatePortalApi.Models
 
 		[Required]
 		[MaxLength(100)]
-		public string Created_By { get; set; }
+		public string Created_By { get; set; } = string.Empty;
 
 		[Required]
 		public DateTime Created_Date { get; set; }
@@ -77,18 +77,18 @@ namespace CorporatePortalApi.Models
 		public int? Corporate_Id { get; set; }
 
 		[ForeignKey("Tenant_ID")]
-		public virtual TmX_Tenant Tenant { get; set; }
+		public virtual required TmX_Tenant Tenant { get; set; }
 
 		[ForeignKey("Customer_Master_ID")]
-		public virtual TmX_Customer_Master CustomerMaster { get; set; }
+		public virtual required TmX_Customer_Master CustomerMaster { get; set; }
 
 		[ForeignKey("Institute_Id")]
-		public virtual TmX_Institute Institute { get; set; }
+		public virtual TmX_Institute? Institute { get; set; }
 
 		[ForeignKey("Product_Id")]
-		public virtual TmX_Product Product { get; set; }
+		public virtual TmX_Product? Product { get; set; }
 
 		[ForeignKey("Corporate_Id")]
-		public virtual TmX_Corporate Corporate { get; set; }
+		public virtual TmX_Corporate? Corporate { get; set; }
 	}
 }

@@ -10,16 +10,16 @@ namespace CorporatePortalApi.Models
 
         [MaxLength(256)]
         [Required]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
-        [Required]
+		[Required]
         public bool EmailConfirmed { get; set; }
 
-        public string PasswordHash { get; set; }
+        public string? PasswordHash { get; set; }
 
-        public string SecurityStamp { get; set; }
+		public string? SecurityStamp { get; set; }
 
-        [MaxLength(15)]
+		[MaxLength(15)]
         public string? PhoneNumber { get; set; }
 
         public bool PhoneNumberConfirmed { get; set; }
@@ -34,19 +34,19 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(256)]
-        public string UserName { get; set; }
+        public string UserName { get; set; } = string.Empty;
 
-        public int? Address_ID { get; set; }
-        public virtual TmX_Address Address { get; set; }
+		public int? Address_ID { get; set; }
+        public virtual TmX_Address? Address { get; set; }
 
         public int? Locale_ID { get; set; }
-        public virtual TmX_Locale Locale { get; set; }
+        public virtual TmX_Locale? Locale { get; set; }
 
         public int? Time_Zone_ID { get; set; }
-        public virtual TmX_Time_Zone TimeZone { get; set; }
+        public virtual TmX_Time_Zone? TimeZone { get; set; }
 
         public int? Tenant_ID { get; set; }
-        public virtual TmX_Tenant Tenant { get; set; }
+        public virtual TmX_Tenant? Tenant { get; set; }
 
         [Required]
         public DateTime RegistrationDate { get; set; }
@@ -63,19 +63,19 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(50)]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
-        [Required]
+		[Required]
         [MaxLength(50)]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
-        [Url]
+		[Url]
         public string? ImageURL { get; set; }
 
         public bool IsTwoFAEnabled { get; set; }
 
         public string? TwoFASecretKey { get; set; }
-        public virtual ICollection<AspNetUserRole> UserRoles { get; set; }
+        public virtual required ICollection<AspNetUserRole> UserRoles { get; set; }
     }
 
 }

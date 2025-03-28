@@ -10,13 +10,13 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(256)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        [Required]
+		[Required]
         public DateTime Effective_Start_Date { get; set; }
 
         [Required]
         public  DateTime Effective_End_Date { get; set; }
-        public virtual ICollection<AspNetUserRole> UserRoles { get; set; }
+        public virtual required ICollection<AspNetUserRole> UserRoles { get; set; }
     }
 }

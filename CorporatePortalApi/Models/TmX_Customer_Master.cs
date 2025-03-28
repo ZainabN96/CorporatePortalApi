@@ -28,7 +28,7 @@ namespace CorporatePortalApi.Models
 
 		[Required]
 		[MaxLength(100)]
-		public string Created_By { get; set; }
+		public string Created_By { get; set; } = string.Empty;
 
 		[Required]
 		public DateTime Created_Date { get; set; }
@@ -106,12 +106,12 @@ namespace CorporatePortalApi.Models
 		public bool Is_Active { get; set; } = true;
 
 		[ForeignKey("Transaction_Id")]
-		public virtual TmX_Transaction Transaction { get; set; }
+		public virtual TmX_Transaction? Transaction { get; set; }
 
 		[ForeignKey("Location_Id")]
-		public virtual TmX_Location Location { get; set; }
+		public virtual TmX_Location? Location { get; set; }
 
 		[ForeignKey("Tenant_Id")]
-		public virtual TmX_Tenant Tenant { get; set; }
+		public virtual required TmX_Tenant Tenant { get; set; }
 	}
 }

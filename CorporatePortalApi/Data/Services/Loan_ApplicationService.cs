@@ -22,17 +22,17 @@ namespace CorporatePortalApi.Data.Services
 		}
 		public async Task<TmX_Loan_Application> Get(int id)
 		{
-			return await dc.TmX_Loan_Application.FindAsync(id);
+			return await dc.TmX_Loan_Application.FindAsync(id) ?? throw new KeyNotFoundException($"Loan application with ID {id} not found.");
 		}
 
 		public async Task<TmX_Loan_Application> GetWithstatus(string status)
 		{
-			return await dc.TmX_Loan_Application.FirstOrDefaultAsync(x => x.Status == status);
+			return await dc.TmX_Loan_Application.FirstOrDefaultAsync(x => x.Status == status) ?? throw new KeyNotFoundException($"No loan application found with status '{status}'.");
 		}
 
 		public async Task<TmX_Loan_Application> GetWithLoan_Application_Number(string loan_appNo)
 		{
-			return await dc.TmX_Loan_Application.FirstOrDefaultAsync(x => x.Loan_Application_Number == loan_appNo);
+			return await dc.TmX_Loan_Application.FirstOrDefaultAsync(x => x.Loan_Application_Number == loan_appNo) ?? throw new KeyNotFoundException($"Loan application with number {loan_appNo} not found.");
 		}
 
 		public async Task<TmX_Loan_Application> GetWithCustomer_Name(string name)
@@ -46,7 +46,7 @@ namespace CorporatePortalApi.Data.Services
 		{
 			return await dc.TmX_Loan_Application
 				.Include(x => x.Customer_Master)
-				.FirstOrDefaultAsync(x => x.Customer_Master.National_Identifier_Value == nic);
+				.FirstOrDefaultAsync(x => x.Customer_Master.National_Identifier_Value == nic) ?? throw new KeyNotFoundException($"No loan application found for CNIC '{nic}'.");
 		}
 
 		public async Task<IEnumerable<TmX_Loan_Application>> GetLoan_ApplicationAsync()

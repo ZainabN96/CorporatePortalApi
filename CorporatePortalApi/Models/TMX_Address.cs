@@ -10,9 +10,9 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(100)]
-        public string Created_By { get; set; }
+        public string Created_By { get; set; } = string.Empty;
 
-        [Required]
+		[Required]
         public DateTime Created_Date { get; set; }
 
         [MaxLength(100)]
@@ -21,11 +21,11 @@ namespace CorporatePortalApi.Models
         public DateTime? Last_Updated_Date { get; set; }
 
         public int? Address_Geography_ID { get; set; }
-        public virtual TmX_Address_Geography AddressGeography { get; set; }
+        public virtual TmX_Address_Geography? AddressGeography { get; set; }
 
         [Required]
         public int Tenant_ID { get; set; }
-        public virtual TmX_Tenant Tenant { get; set; }
+        public virtual required TmX_Tenant Tenant { get; set; }
 
         public string? UDF_Data { get; set; }
 
@@ -59,7 +59,7 @@ namespace CorporatePortalApi.Models
         public Point? Address_Coordinates { get; set; } // Geography type mapped to NetTopologySuite Point
         
         public int? Address_Type_Lkp_ID { get; set; }
-        public virtual TmX_Lookup AddressTypeLookup { get; set; }
+        public virtual TmX_Lookup? AddressTypeLookup { get; set; }
 
         [MaxLength(50)]
         public string? Country { get; set; }

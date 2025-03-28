@@ -2,6 +2,7 @@
 using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Dtos;
 using CorporatePortalApi.Errors;
+using CorporatePortalApi.Helper;
 using CorporatePortalApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,10 +28,7 @@ namespace CorporatePortalApi.Controllers.Api
 
 			if (entry == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Loan Application not found";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			return Ok(entry);
@@ -42,10 +40,7 @@ namespace CorporatePortalApi.Controllers.Api
 			var entries = await uow.Loan_ApplicationService.GetLoan_ApplicationAsync();
 			if (entries == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Loan Application not found";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 			return Ok(entries);
 		}
@@ -55,10 +50,10 @@ namespace CorporatePortalApi.Controllers.Api
 		{
 			if (await uow.Loan_ApplicationService.IsLoan_ApplicationExist(Loan_ApplicationDto.Loan_Application_Number))
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Loan Application is already exist";
-				return BadRequest(apiError);
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Loan Application already exists",
+						$"The Loan Application '{Loan_ApplicationDto.Loan_Application_Number}' is already registered."
+				 ));
 			}
 
 			var loan_app = mapper.Map<TmX_Loan_Application>(Loan_ApplicationDto);
@@ -72,27 +67,24 @@ namespace CorporatePortalApi.Controllers.Api
 		[HttpPut("updateLoanApplication")]
 		public async Task<IActionResult> UpdateLoanApplication(TmX_Loan_ApplicationDto Loan_ApplicationDto)
 		{
-			APIError apiError = new APIError();
-
 			if (await uow.Loan_ApplicationService.IsLoan_ApplicationExistInUpdate(Loan_ApplicationDto.Loan_Application_Number, Loan_ApplicationDto.Loan_Application_ID))
 			{
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Loan_Application is already exist";
-				return BadRequest(apiError);
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Loan Application already exists",
+						$"The Loan Application '{Loan_ApplicationDto.Loan_Application_Number}' is already registered with ID {Loan_ApplicationDto.Loan_Application_ID}."
+				 ));
 			}
 
 			var LoanFromDb = await uow.Loan_ApplicationService.Get(Loan_ApplicationDto.Loan_Application_ID);
 
 			if (LoanFromDb == null)
 			{
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Loan_Application not found";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			mapper.Map(Loan_ApplicationDto, LoanFromDb);
 
-			Loan_ApplicationDto.Last_Updated_Date = DateTime.Now;
+			UHelper.UpdateTimestamp(Loan_ApplicationDto);
 
 			await uow.SaveAsync();
 			return Ok(Loan_ApplicationDto);
@@ -101,18 +93,15 @@ namespace CorporatePortalApi.Controllers.Api
 		[HttpPost("deleteLoanApplication")]
 		public async Task<IActionResult> DeleteLoanApplication(DeleteKeyPairDto deleteKeyPairDto)
 		{
-			var ProFromDb = await uow.Loan_ApplicationService.Get(deleteKeyPairDto.Id);
+			var LoanFromDb = await uow.Loan_ApplicationService.Get(deleteKeyPairDto.Id);
 
-			if (ProFromDb == null)
+			if (LoanFromDb == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Loan_Application not found";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
-			ProFromDb.Status = "IsDeleted";
-			ProFromDb.Last_Updated_Date = DateTime.Now;
+			LoanFromDb.Status = "IsDeleted";
+			LoanFromDb.Last_Updated_Date = DateTime.Now;
 
 			await uow.SaveAsync();
 

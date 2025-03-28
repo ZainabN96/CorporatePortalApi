@@ -10,14 +10,14 @@ namespace CorporatePortalApi.Models
 
 		[Required]
 		[MaxLength(50)]
-		public string Person_First_Name { get; set; }
+		public string Person_First_Name { get; set; } = string.Empty;
 
 		public DateTime? Person_Date_Of_Birth { get; set; }
 		public int? Person_Gender_Lkp { get; set; }
 
 		[Required]
 		[MaxLength(50)]
-		public string Created_By { get; set; }
+		public string Created_By { get; set; } = string.Empty;
 
 		[Required]
 		public DateTime Created_Date { get; set; }
@@ -34,7 +34,7 @@ namespace CorporatePortalApi.Models
 
 		[Required]
 		[MaxLength(100)]
-		public string Person_Last_Name { get; set; }
+		public string Person_Last_Name { get; set; } = string.Empty;
 
 		[Required]
 		public bool Active_Flag { get; set; }
@@ -96,10 +96,10 @@ namespace CorporatePortalApi.Models
 		public Guid? Mobile_ID { get; set; }
 
 		[ForeignKey("Currency_ID")]
-		public virtual TmX_Currency Currency { get; set; }
+		public virtual TmX_Currency? Currency { get; set; }
 
 		[ForeignKey("Tenant_ID")]
-		public virtual TmX_Tenant Tenant { get; set; }
+		public virtual required TmX_Tenant Tenant { get; set; }
 
 	}
 }

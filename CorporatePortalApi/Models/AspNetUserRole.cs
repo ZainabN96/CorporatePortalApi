@@ -13,13 +13,13 @@ namespace CorporatePortalApi.Models
         [Key, Column(Order = 1)]
         [Required]
         [MaxLength(128)]
-        public string RoleId { get; set; }
+        public string RoleId { get; set; } = string.Empty;
 
-        // Navigation Properties
-        [ForeignKey("RoleId")]
-        public virtual AspNetRole Role { get; set; }
+		// Navigation Properties
+		[ForeignKey("RoleId")]
+        public virtual required AspNetRole Role { get; set; }
 
         [ForeignKey("UserId")]
-        public virtual AspNetUser User { get; set; }
+        public virtual required AspNetUser User { get; set; }
     }
 }

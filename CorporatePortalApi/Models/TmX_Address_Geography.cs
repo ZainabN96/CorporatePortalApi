@@ -9,9 +9,9 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(100)]
-        public string Geography_Name { get; set; }
+        public string Geography_Name { get; set; } = string.Empty;
 
-        [MaxLength(100)]
+		[MaxLength(100)]
         public string? Geography_Description { get; set; }
 
         [MaxLength(50)]
@@ -24,9 +24,9 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(100)]
-        public string Created_By { get; set; }
+        public string Created_By { get; set; } = string.Empty;
 
-        [Required]
+		[Required]
         public DateTime Created_Date { get; set; }
 
         [MaxLength(100)]

@@ -2,7 +2,7 @@
 
 namespace CorporatePortalApi.Dtos
 {
-	public class TmX_Loan_Application_ChecklistDto
+	public class TmX_Loan_Application_ChecklistDto: BaseDto
 	{
 		public int Loan_Application_Checklist_ID { get; set; }
 		public string? Attachment_Url { get; set; }
@@ -13,9 +13,7 @@ namespace CorporatePortalApi.Dtos
 		public DateTime Effective_Start_Date { get; set; }
 		public DateTime Effective_End_Date { get; set; }
 		public string Created_By { get; set; }
-		public DateTime Created_Date { get; set; }
 		public string? Last_Updated_By { get; set; }
-		public DateTime? Last_Updated_Date { get; set; }
 		public string? Image_Data { get; set; }
 		public bool? Verification_Required { get; set; }
 		public int? Location_ID { get; set; }

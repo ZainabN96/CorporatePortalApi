@@ -55,7 +55,7 @@ namespace CorporatePortalApi.Models
 		public int Application_Status_Lkp { get; set; }
 
 		[Required, MaxLength(100)]
-		public string Created_By { get; set; }
+		public string Created_By { get; set; } = string.Empty;
 
 		[Required]
 		public DateTime Created_Date { get; set; }
@@ -166,27 +166,27 @@ namespace CorporatePortalApi.Models
 		public bool Overriden_Loan_Limit_Flag { get; set; } = false;
 
 		[ForeignKey("Currency_Id")]
-		public virtual TmX_Currency Currency { get; set; }
+		public virtual TmX_Currency? Currency { get; set; }
 
 		[ForeignKey("Order_ID")]
-		public virtual TmX_Order Order { get; set; }
+		public virtual TmX_Order? Order { get; set; }
 
 		[ForeignKey("Company_Branch_Id")]
-		public virtual TmX_Company_Branch Company_Branch { get; set; }
+		public virtual required TmX_Company_Branch Company_Branch { get; set; }
 
 		[ForeignKey("Geofence_Id")]
-		public virtual TmX_Geofence Geofence { get; set; }
+		public virtual TmX_Geofence? Geofence { get; set; }
 
 		[ForeignKey("Loan_Product_Id")]
-		public virtual TmX_Product Product { get; set; }
+		public virtual required TmX_Product Product { get; set; }
 
 		[ForeignKey("Customer_Master_Id")]
-		public virtual TmX_Customer_Master Customer_Master { get; set; }
+		public virtual TmX_Customer_Master? Customer_Master { get; set; }
 
 		[ForeignKey("User_Id")]
-		public virtual TmX_User User { get; set; }
+		public virtual TmX_User? User { get; set; }
 
 		[ForeignKey("Tenant_Id")]
-		public virtual TmX_Tenant Tenant { get; set; }
+		public virtual required TmX_Tenant Tenant { get; set; }
 	}
 }

@@ -2,6 +2,7 @@
 using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Dtos;
 using CorporatePortalApi.Errors;
+using CorporatePortalApi.Helper;
 using CorporatePortalApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,10 +26,7 @@ namespace CorporatePortalApi.Controllers.Api
 
 			if (entry == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Loan Application Checklist not found";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			return Ok(entry);
@@ -40,10 +38,7 @@ namespace CorporatePortalApi.Controllers.Api
 			var entries = await uow.Loan_Application_ChecklistService.GetLoan_App_ChecklistAsync();
 			if (entries == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Loan Application Checklist not found";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 			return Ok(entries);
 		}
@@ -53,10 +48,10 @@ namespace CorporatePortalApi.Controllers.Api
 		{
 			if (await uow.Loan_Application_ChecklistService.IsLoan_App_ChecklistExist(Loan_App_ChecklistDto.Loan_Application_Checklist_ID))
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Loan Application Checklist is already exist";
-				return BadRequest(apiError);
+				return BadRequest(ErrorCodes.BadRequestError(
+						"Loan Application Checklist already exists",
+						$"The Loan Application Checklist is already registered with ID {Loan_App_ChecklistDto.Loan_Application_Checklist_ID}."
+				));
 			}
 
 			var loan_Checklist = mapper.Map<TmX_Loan_Application_Checklist>(Loan_App_ChecklistDto);
@@ -70,20 +65,16 @@ namespace CorporatePortalApi.Controllers.Api
 		[HttpPut("updateLoanAppChecklist")]
 		public async Task<IActionResult> UpdateLoanAppChecklist(TmX_Loan_Application_ChecklistDto Loan_App_ChecklistDto)
 		{
-			APIError apiError = new APIError();
-
 			var LoanFromDb = await uow.Loan_Application_ChecklistService.Get(Loan_App_ChecklistDto.Loan_Application_Checklist_ID);
 
 			if (LoanFromDb == null)
 			{
-				apiError.ErrorCode = BadRequest().StatusCode;
-				apiError.ErrorMessage = "Loan Application Checklist not found";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
 			mapper.Map(Loan_App_ChecklistDto, LoanFromDb);
 
-			Loan_App_ChecklistDto.Last_Updated_Date = DateTime.Now;
+			UHelper.UpdateTimestamp(Loan_App_ChecklistDto);
 
 			await uow.SaveAsync();
 			return Ok(Loan_App_ChecklistDto);
@@ -92,18 +83,14 @@ namespace CorporatePortalApi.Controllers.Api
 		[HttpPost("deleteLoanApplication")]
 		public async Task<IActionResult> DeleteLoanApplication(DeleteKeyPairDto deleteKeyPairDto)
 		{
-			var ProFromDb = await uow.Loan_Application_ChecklistService.Get(deleteKeyPairDto.Id);
+			var LoanCFromDb = await uow.Loan_Application_ChecklistService.Get(deleteKeyPairDto.Id);
 
-			if (ProFromDb == null)
+			if (LoanCFromDb == null)
 			{
-				APIError apiError = new APIError();
-				apiError.ErrorCode = NoContent().StatusCode;
-				apiError.ErrorMessage = "Loan Application Checklist not found";
-				return BadRequest(apiError);
+				return NotFound(ErrorCodes.NotFound());
 			}
 
-			ProFromDb.Active_Flag = false;
-			ProFromDb.Last_Updated_Date = DateTime.Now;
+			UHelper.SoftDelete(LoanCFromDb);
 
 			await uow.SaveAsync();
 

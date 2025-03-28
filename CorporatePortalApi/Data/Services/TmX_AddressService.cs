@@ -22,14 +22,13 @@ namespace CorporatePortalApi.Data.Services
 
         public async Task<TmX_Address> Get(int id)
         {
-            return await dc.TmX_Address.FindAsync(id);
-        }
+            return await dc.TmX_Address.FindAsync(id) ?? throw new KeyNotFoundException($"Address with ID '{id}' not found.");
+		}
 
-        public async Task<TmX_Address> GetWithName(string country)
+        public async Task<IEnumerable<TmX_Address>> GetWithCountry(string country)
         {
-            return await dc.TmX_Address.Where(x => x.Country == country)
-                                       .FirstOrDefaultAsync();
-        }
+            return await dc.TmX_Address.Where(x => x.Country == country).ToListAsync();
+		}
 
         public async Task<IEnumerable<TmX_Address>> GetTmX_AddressAsync()
         {

@@ -18,9 +18,9 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(100)]
-        public string Created_By { get; set; }
+        public string Created_By { get; set; } = string.Empty;
 
-        [Required]
+		[Required]
         public DateTime Created_Date { get; set; }
 
         [MaxLength(100)]

@@ -2,8 +2,8 @@
 
 namespace CorporatePortalApi.Dtos
 {
-    public class TmX_UserDto
-    {
+    public class TmX_UserDto: BaseDto
+	{
         public string User_ID { get; set; }
         public string Parent_User_ID { get; set; }
         public int Tenant_ID { get; set; }
@@ -23,8 +23,6 @@ namespace CorporatePortalApi.Dtos
         public DateTime Effective_Start_Date { get; set; }
         public DateTime Effective_End_Date { get; set; }
         public string Created_By { get; set; }
-        public DateTime Created_Date { get; set; }
-        public DateTime? Last_Updated_Date { get; set; }
         public string Last_Updated_By { get; set; }
         public int? Primary_National_ID_Type_Lkp_ID { get; set; }
         public int? User_Type_Lkp_ID { get; set; }

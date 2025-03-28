@@ -22,7 +22,7 @@ namespace CorporatePortalApi.Controllers.Api
             this.mapper = mapper;
         }
 
-        [HttpGet("get/{id}")]
+        [HttpGet("getbyId/{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var entry = await uow.AspNetUserRolesService.Get(id);
@@ -35,7 +35,7 @@ namespace CorporatePortalApi.Controllers.Api
             return Ok(entry);
         }
 
-        [HttpGet("get/{userid}")]
+        [HttpGet("getbyUserId/{userid}")]
         public async Task<IActionResult> GetWithUserId(int userId)
         {
             var entry = await uow.AspNetUserRolesService.GetWithUserId(userId);
@@ -49,7 +49,7 @@ namespace CorporatePortalApi.Controllers.Api
         }
 
 
-        [HttpGet("get/{roleId}")]
+        [HttpGet("getbyRoleId/{roleId}")]
         public async Task<IActionResult> GetWithRoleId(string roleId)
         {
             var entry = await uow.AspNetUserRolesService.GetWithRoleId(roleId);

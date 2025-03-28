@@ -11,16 +11,16 @@ namespace CorporatePortalApi.Models
         public int Tenant_ID { get; set; }
 
         [MaxLength(50)]
-        public string Product_Code { get; set; }
+        public string? Product_Code { get; set; }
 
-        [Required]
+		[Required]
         [MaxLength(100)]
-        public string Product_Name { get; set; }
+        public string Product_Name { get; set; } = string.Empty;
 
-        [MaxLength(100)]
-        public string Product_Description { get; set; }
+		[MaxLength(100)]
+        public string? Product_Description { get; set; }
 
-        public int Product_Type_Lkp { get; set; }
+		public int Product_Type_Lkp { get; set; }
 
         public int? Product_Tenure_Months { get; set; }
 
@@ -42,9 +42,9 @@ namespace CorporatePortalApi.Models
         public bool Group_Flag { get; set; }
 
         [MaxLength(100)]
-        public string Workflow_Scheme_Code { get; set; }
+        public string? Workflow_Scheme_Code { get; set; }
 
-        public bool Individual_Flag { get; set; }
+		public bool Individual_Flag { get; set; }
 
         public bool Active_Flag { get; set; }
 
@@ -53,12 +53,12 @@ namespace CorporatePortalApi.Models
         public DateTime Effective_End_Date { get; set; }
 
         [MaxLength(100)]
-        public string Created_By { get; set; }
+        public string? Created_By { get; set; }
 
-        public DateTime Created_Date { get; set; }
+		public DateTime Created_Date { get; set; }
 
         [MaxLength(100)]
-        public string Last_Updated_By { get; set; }
+        public string? Last_Updated_By { get; set; }
 
         public DateTime? Last_Updated_Date { get; set; }
 
@@ -72,7 +72,7 @@ namespace CorporatePortalApi.Models
 
         public int? Monthly_Repayment_Due_Day { get; set; }
 
-        public string Shortlisting_Rules_Lookup { get; set; }
+        public string? Shortlisting_Rules_Lookup { get; set; }
 
 		[Column(TypeName = "decimal(18,0)")]
 		public decimal? Max_Allowed_Loan_Limit { get; set; }
@@ -82,9 +82,9 @@ namespace CorporatePortalApi.Models
         public bool? Ask_Bank_Details_Flag { get; set; }
 
         [MaxLength(50)]
-        public string Company_Name { get; set; }
+        public string? Company_Name { get; set; }
 
-        public string Company_Address { get; set; }
+        public string? Company_Address { get; set; }
 
         public bool? PDC_Flag { get; set; }
 
@@ -94,12 +94,12 @@ namespace CorporatePortalApi.Models
 
        // Navigation Properties
        [ForeignKey("Currency_ID")]
-       public virtual TmX_Currency Currency { get; set; }
+       public virtual required TmX_Currency Currency { get; set; }
 
        [ForeignKey("Bank_Id")]
-       public virtual TmX_Bank Bank { get; set; }
+       public virtual TmX_Bank? Bank { get; set; }
 
        [ForeignKey("Tenant_ID")]
-       public virtual TmX_Tenant Tenant { get; set; }
+       public virtual TmX_Tenant? Tenant { get; set; }
     }
 }

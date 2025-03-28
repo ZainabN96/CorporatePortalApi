@@ -3,8 +3,8 @@
     public class TmX_CorporateDto: BaseDto
     {
         public int Corporate_Id { get; set; }
-        public string Corporate_Name { get; set; }
-        public string Corporate_Code { get; set; }
+        public required string Corporate_Name { get; set; }
+        public required string Corporate_Code { get; set; }
         public string? Corporate_Description { get; set; }
         public string? Corporate_NTN_Number { get; set; }
         public string? Corporate_Bank_Account { get; set; }

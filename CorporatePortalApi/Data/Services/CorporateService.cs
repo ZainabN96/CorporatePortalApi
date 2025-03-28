@@ -21,14 +21,14 @@ namespace CorporatePortalApi.Data.Services
 
         public async Task<TmX_Corporate> Get(int id)
         {
-            return await dc.TmX_Corporate.FindAsync(id);
-        }
+            return await dc.TmX_Corporate.FindAsync(id) ?? throw new KeyNotFoundException($"Corporate with ID '{id}' not found.");
+		}
 
         public async Task<TmX_Corporate> GetWithName(string name)
         {
             return await dc.TmX_Corporate.Where(x => x.Corporate_Name == name)
-                                       .FirstOrDefaultAsync();
-        }
+                                       .FirstOrDefaultAsync() ?? throw new KeyNotFoundException($"Corporate with Name '{name}' not found.");
+		}
 
         public async Task<IEnumerable<TmX_Corporate>> GetOrganizationAsync()
         {

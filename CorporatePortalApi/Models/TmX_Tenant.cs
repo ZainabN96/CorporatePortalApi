@@ -9,9 +9,9 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(100)]
-        public string Tenant_Name { get; set; }
+        public string Tenant_Name { get; set; } = string.Empty;
 
-        public DateTime? Tenant_Registration_Date { get; set; }
+		public DateTime? Tenant_Registration_Date { get; set; }
 
         public DateTime? Tenant_Activation_Date { get; set; }
 
@@ -28,9 +28,9 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(100)]
-        public string Created_By { get; set; }
+        public string Created_By { get; set; } = string.Empty;
 
-        [Required]
+		[Required]
         public DateTime Created_Date { get; set; }
 
         [MaxLength(100)]

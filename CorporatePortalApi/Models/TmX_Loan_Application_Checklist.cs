@@ -25,7 +25,7 @@ namespace CorporatePortalApi.Models
 
 		[Required]
 		[MaxLength(100)]
-		public string Created_By { get; set; }
+		public string Created_By { get; set; } = string.Empty;
 
 		[Required]
 		public DateTime Created_Date { get; set; }
@@ -55,24 +55,24 @@ namespace CorporatePortalApi.Models
 		public bool Is_Front_Side { get; set; } = true;
 
 		[ForeignKey("Location_ID")]
-		public virtual TmX_Location Location { get; set; }
+		public virtual TmX_Location? Location { get; set; }
 
 		[ForeignKey("Account_Application_ID")]
-		public virtual TmX_Account_Application Account_Application { get; set; }
+		public virtual TmX_Account_Application? Account_Application { get; set; }
 
 		[ForeignKey("User_ID")]
-		public virtual TmX_User User { get; set; }
+		public virtual TmX_User? User { get; set; }
 
 		[ForeignKey("Tab_ID")]
-		public virtual TmX_Tab Tab { get; set; }
+		public virtual TmX_Tab? Tab { get; set; }
 
 		[ForeignKey("Loan_Application_ID")]
-		public virtual TmX_Loan_Application Loan_Application { get; set; }
+		public virtual TmX_Loan_Application? Loan_Application { get; set; }
 
 		[ForeignKey("Loan_Product_Checklist_Id")]
-		public virtual TmX_Product_Checklist Product_Checklist { get; set; }
+		public virtual TmX_Product_Checklist? Product_Checklist { get; set; }
 
 		[ForeignKey("Tenant_ID")]
-		public virtual TmX_Tenant Tenant { get; set; }
+		public virtual required TmX_Tenant Tenant { get; set; }
 	}
 }

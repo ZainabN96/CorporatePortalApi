@@ -11,19 +11,19 @@ namespace CorporatePortalApi.Models
         public int? Parent_Location_ID { get; set; }
 
         [ForeignKey("Parent_Location_ID")]
-        public virtual TmX_Location Parent_Location { get; set; }
+        public virtual TmX_Location? Parent_Location { get; set; }
 
         [Required]
         public int Tenant_ID { get; set; }
 
         [ForeignKey("Tenant_ID")]
-        public virtual TmX_Tenant Tenant { get; set; }
+        public virtual required TmX_Tenant Tenant { get; set; }
 
         [Required]
         [MaxLength(50)]
-        public string Location_Code { get; set; }
+        public string Location_Code { get; set; } = string.Empty;
 
-        [MaxLength(200)]
+		[MaxLength(200)]
         public string? Location_Name { get; set; }
 
         [Required]
@@ -37,9 +37,9 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(100)]
-        public string Created_By { get; set; }
+        public string Created_By { get; set; } = string.Empty;
 
-        [Required]
+		[Required]
         public DateTime Created_Date { get; set; }
 
         [MaxLength(100)]
@@ -51,6 +51,6 @@ namespace CorporatePortalApi.Models
         public int Location_Type_Lkp_ID { get; set; }
 
         [ForeignKey("Location_Type_Lkp_ID")]
-        public virtual TmX_Lookup Location_Lookup { get; set; }
+        public virtual required TmX_Lookup Location_Lookup { get; set; }
     }
 }

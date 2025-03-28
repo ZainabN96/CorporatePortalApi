@@ -9,14 +9,14 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(50)]
-        public string Language { get; set; }
+        public string Language { get; set; } = string.Empty;
 
-        [Required]
+		[Required]
         [MaxLength(4)]
-        public string Locale_LCID { get; set; }
+        public string Locale_LCID { get; set; } = string.Empty;
 
-        [Required]
+		[Required]
         [MaxLength(50)]
-        public string Country_Region { get; set; }
-    }
+        public string Country_Region { get; set; } = string.Empty;
+	}
 }

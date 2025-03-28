@@ -1,6 +1,6 @@
 ﻿namespace CorporatePortalApi.Dtos
 {
-	public class TmX_Loan_ApplicationDto
+	public class TmX_Loan_ApplicationDto: BaseDto
 	{
 		public int Loan_Application_ID { get; set; }
 		public int Company_Branch_Id { get; set; }
@@ -21,9 +21,7 @@
 		public decimal? Asset_Insurance_Premium_Amount { get; set; }
 		public int Application_Status_Lkp { get; set; }
 		public string Created_By { get; set; }
-		public DateTime Created_Date { get; set; }
 		public string? Last_Updated_By { get; set; }
-		public DateTime? Last_Updated_Date { get; set; }
 		public string? Loan_Application_Number { get; set; }
 		public int? Total_Tenure { get; set; }
 		public string? Other_Loan_Institute_Name { get; set; }

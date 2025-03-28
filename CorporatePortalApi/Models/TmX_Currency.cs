@@ -21,16 +21,16 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(20)]
-        public string Currency_Symbol { get; set; }
+        public string Currency_Symbol { get; set; } = string.Empty;
 
-        [MaxLength(100)]
+		[MaxLength(100)]
         public string? Currency_Description { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string Created_By { get; set; }
+        public string Created_By { get; set; } = string.Empty;
 
-        [Required]
+		[Required]
         public DateTime Created_Date { get; set; }
 
         [MaxLength(100)]

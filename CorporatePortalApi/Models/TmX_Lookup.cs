@@ -38,9 +38,9 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(100)]
-        public string Created_By { get; set; }
+        public string Created_By { get; set; } = string.Empty;
 
-        [MaxLength(100)]
+		[MaxLength(100)]
         public string? Created_Date { get; set; } // in script the datatype was nvarchar
 
         [MaxLength(100)]
