@@ -4,11 +4,10 @@ namespace CorporatePortalApi.Data.IServices
 {
     public interface IAspNetUserRoleService
     {
-        Task<AspNetUserRole> Get(int id);
-        Task<AspNetUserRole> GetWithUserId(int userId);
-        Task<AspNetUserRole> GetWithRoleId(string roleId);
+        Task<AspNetUser> GetWithUserId(int userId);
+        Task<AspNetRole> GetWithRoleId(string roleId);
         Task<IEnumerable<AspNetUserRole>> GetAspNetUserRoleAsync();
         AspNetUserRole Add(AspNetUserRole userRole);
-        Task<bool> IsAspNetUserRoleExist(string roleId);
+        Task<bool> IsAspNetUserRoleExist(string roleId, int userId);
     }
 }

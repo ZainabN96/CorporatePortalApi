@@ -1,5 +1,6 @@
 ﻿using CorporatePortalApi.Data.IServices;
 using CorporatePortalApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CorporatePortalApi.Data.Services
 {
@@ -22,5 +23,14 @@ namespace CorporatePortalApi.Data.Services
         {
             return await dc.TmX_Location.FindAsync(id);
         }
-    }
+		public async Task<IEnumerable<TmX_Location>> GetAll()
+		{
+			return await dc.TmX_Location.Where(x => x.Active_Flag == true)
+									   .OrderBy(x => x.Location_Code)
+									   .Include(x => x.Parent_Location)
+									   .Include(x => x.Tenant)
+									   .Include(x => x.Location_Lookup)
+									   .ToListAsync();
+		}
+	}
 }

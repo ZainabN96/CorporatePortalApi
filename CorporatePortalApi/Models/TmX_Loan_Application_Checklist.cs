@@ -1,5 +1,4 @@
-﻿using NetTopologySuite.Geometries;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CorporatePortalApi.Models
@@ -40,7 +39,7 @@ namespace CorporatePortalApi.Models
 		public int? Account_Application_ID { get; set; }
 
 		[MaxLength(50)]
-		public string? User_ID { get; set; }
+		public Guid? User_ID { get; set; }
 
 		public Guid? Mobile_ID { get; set; }
 		public int? Tab_ID { get; set; }

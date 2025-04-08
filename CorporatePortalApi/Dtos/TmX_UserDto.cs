@@ -4,8 +4,8 @@ namespace CorporatePortalApi.Dtos
 {
     public class TmX_UserDto: BaseDto
 	{
-        public string User_ID { get; set; }
-        public string Parent_User_ID { get; set; }
+        public Guid User_ID { get; set; }
+        public Guid? Parent_User_ID { get; set; }
         public int Tenant_ID { get; set; }
         public int? Location_ID { get; set; }
         public int? Address_ID { get; set; }

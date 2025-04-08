@@ -69,7 +69,7 @@ namespace CorporatePortalApi.Controllers.Api
             {
 				return BadRequest(ErrorCodes.BadRequestError(
 	                   "Organization already exists",
-	                   $"The organization '{OrganizationDto.Corporate_Name}' is already registered with ID {OrganizationDto.Corporate_Id}."
+	                   $"The organization '{OrganizationDto.Corporate_Name}' is already registered."
                 ));
 			}
 

@@ -23,7 +23,7 @@ namespace CorporatePortalApi.Controllers.Api
 		}
 
 		[HttpGet("get/{id}")]
-		public async Task<IActionResult> Get(string id)
+		public async Task<IActionResult> Get(Guid id)
 		{
 			var entry = await uow.UserService.Get(id);
 
@@ -52,16 +52,26 @@ namespace CorporatePortalApi.Controllers.Api
 			if (await uow.UserService.IsUserExist(userDto.First_Name, userDto.Last_Name))
 			{
 				return BadRequest(ErrorCodes.BadRequestError(
-						"User already exists",
-						$"The user '{userDto.First_Name} {userDto.Last_Name}' is already registered."
-				 ));
+					"User already exists",
+					$"The user '{userDto.First_Name} {userDto.Last_Name}' is already registered."
+				));
 			}
 
 			var usr = mapper.Map<TmX_User>(userDto);
 
-			uow.UserService.Add(usr);
+			// Check if Parent_User_ID is provided and valid
+			if (usr.Parent_User_ID.HasValue)
+			{
+				var parentExists = await uow.UserService.Get(usr.Parent_User_ID.Value);
+				if (parentExists == null)
+				{
+					usr.Parent_User_ID = null;
+				}
+			}
 
+			uow.UserService.Add(usr);
 			await uow.SaveAsync();
+
 			return Ok(usr);
 		}
 
@@ -72,7 +82,7 @@ namespace CorporatePortalApi.Controllers.Api
 			{
 				return BadRequest(ErrorCodes.BadRequestError(
 						"User already exists",
-						$"The user '{userDto.First_Name} {userDto.Last_Name}' is already registered with ID {userDto.User_ID}."
+						$"The user '{userDto.First_Name} {userDto.Last_Name}' is already registered."
 				 ));
 			}
 
@@ -91,21 +101,26 @@ namespace CorporatePortalApi.Controllers.Api
 			return Ok(userDto);
 		}
 
-		//[HttpPost("deleteUsers")]
-		//public async Task<IActionResult> DeleteUsers(DeleteKeyPairDto deleteKeyPairDto)
-		//{
-		//	var userFromDb = await uow.UserService.Get(Guid.Parse((deleteKeyPairDto.Id).ToString()));
+		[HttpPost("deleteUsers")]
+		public async Task<IActionResult> DeleteUsers(DeleteKeyPairDto deleteKeyPairDto)
+		{
+			if (!deleteKeyPairDto.GuidId.HasValue)
+			{
+				return BadRequest("Invalid GUID provided.");
+			}
 
-		//	if (userFromDb == null)
-		//	{
-		//		return NotFound(ErrorCodes.NotFound());
-		//	}
+			var userFromDb = await uow.UserService.Get(deleteKeyPairDto.GuidId.Value);
 
-		//	UHelper.SoftDelete(userFromDb);
+			if (userFromDb == null)
+			{
+				return NotFound(ErrorCodes.NotFound());
+			}
 
-		//	await uow.SaveAsync();
+			UHelper.SoftDelete(userFromDb);
 
-		//	return Ok(deleteKeyPairDto);
-		//}
+			await uow.SaveAsync();
+
+			return Ok(deleteKeyPairDto);
+		}
 	}
 }

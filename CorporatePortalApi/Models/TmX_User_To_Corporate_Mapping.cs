@@ -10,7 +10,7 @@ namespace CorporatePortalApi.Models
 
         [Required]
         [MaxLength(50)]
-        public string User_Id { get; set; }=string.Empty;
+        public Guid User_Id { get; set; }
 
         [Required]
         public int Corporate_Id { get; set; }

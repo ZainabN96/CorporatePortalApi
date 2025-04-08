@@ -34,7 +34,10 @@ namespace CorporatePortalApi.Data.Services
         {
             return await dc.TmX_Address.Where(x => x.Active_Flag == true)
                                        .OrderBy(x => x.Country)
-                                       .ToListAsync();
+									   .Include(x => x.AddressGeography)
+									   .Include(x => x.Tenant)
+									   .Include(x => x.AddressTypeLookup)
+									   .ToListAsync();
         }
 
         public async Task<bool> IsTmX_AddressExist(string country)

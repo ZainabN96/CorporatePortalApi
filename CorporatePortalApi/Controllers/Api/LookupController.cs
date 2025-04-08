@@ -75,7 +75,7 @@ namespace CorporatePortalApi.Controllers.Api
             {
 				return BadRequest(ErrorCodes.BadRequestError(
 						"Lookup already exists",
-						$"The Lookup '{LookupDto.Lookup_Name}' is already registered with ID {LookupDto.Lookup_ID}."
+						$"The Lookup '{LookupDto.Lookup_Name}' is already registered."
 				 ));
 			}
 

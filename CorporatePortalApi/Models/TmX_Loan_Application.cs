@@ -41,7 +41,7 @@ namespace CorporatePortalApi.Models
 		public decimal? Installment_Amount { get; set; }
 
 		[MaxLength(50)]
-		public string? User_Id { get; set; }
+		public Guid? User_Id { get; set; }
 
 		public int? Currency_Id { get; set; }
 

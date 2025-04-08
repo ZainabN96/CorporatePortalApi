@@ -71,7 +71,7 @@ namespace CorporatePortalApi.Controllers.Api
 			{
 				return BadRequest(ErrorCodes.BadRequestError(
 						"Loan Application already exists",
-						$"The Loan Application '{Loan_ApplicationDto.Loan_Application_Number}' is already registered with ID {Loan_ApplicationDto.Loan_Application_ID}."
+						$"The Loan Application '{Loan_ApplicationDto.Loan_Application_Number}' is already registered."
 				 ));
 			}
 
@@ -100,7 +100,7 @@ namespace CorporatePortalApi.Controllers.Api
 				return NotFound(ErrorCodes.NotFound());
 			}
 
-			LoanFromDb.Status = "IsDeleted";
+			LoanFromDb.Status = "InActive";
 			LoanFromDb.Last_Updated_Date = DateTime.Now;
 
 			await uow.SaveAsync();

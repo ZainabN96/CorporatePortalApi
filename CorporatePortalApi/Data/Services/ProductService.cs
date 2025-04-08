@@ -28,19 +28,28 @@ namespace CorporatePortalApi.Data.Services
         public async Task<TmX_Product> GetWithProductName(string pname)
         {
             return await dc.TmX_Product.Where(x => x.Product_Name == pname)
+                                       .Include(x => x.Currency)       
+                                       .Include(x => x.Bank)
+                                       .Include(x => x.Tenant)
                                        .FirstOrDefaultAsync();
-        } 
+        }       
         public async Task<TmX_Product> GetWithCompanyName(string cname)
         {
             return await dc.TmX_Product.Where(x => x.Company_Name == cname)
-                                       .FirstOrDefaultAsync();
+				                       .Include(x => x.Currency)
+									   .Include(x => x.Bank)
+									   .Include(x => x.Tenant)
+									   .FirstOrDefaultAsync();
         }
         
         public async Task<IEnumerable<TmX_Product>> GetProductAsync()
         {
             return await dc.TmX_Product.Where(x => x.Active_Flag == true)
                                        .OrderBy(x => x.Product_Name)
-                                       .ToListAsync();
+									   .Include(x => x.Currency)
+									   .Include(x => x.Bank)
+									   .Include(x => x.Tenant)
+									   .ToListAsync();
         }
 
         public async Task<bool> IsProductExist(string pName)

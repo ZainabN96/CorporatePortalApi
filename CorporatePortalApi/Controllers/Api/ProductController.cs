@@ -68,7 +68,7 @@ namespace CorporatePortalApi.Controllers.Api
             {
 				return BadRequest(ErrorCodes.BadRequestError(
 						"Product already exists",
-						$"The Product '{ProductDto.Product_Name}' is already registered with ID {ProductDto.Product_ID}."
+						$"The Product '{ProductDto.Product_Name}' is already registered."
 				 ));
 			}
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CorporatePortalApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250314094752_Add_updated_tables")]
-    partial class Add_updated_tables
+    [Migration("20250403071937_Add_Tables_Again_ChangeDatatype")]
+    partial class Add_Tables_Again_ChangeDatatype
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,7 +107,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PasswordHash")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -121,7 +120,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
@@ -485,11 +483,9 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Corporate_Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Corporate_Bank_Account")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -499,21 +495,17 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Corporate_Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Corporate_Email_Address")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Corporate_Image")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Corporate_NTN_Number")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -523,7 +515,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Corporate_URL")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -539,7 +530,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Last_Updated_By")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -987,9 +977,9 @@ namespace CorporatePortalApi.Migrations
                     b.Property<int?>("Type_Of_Screening_Lkp")
                         .HasColumnType("int");
 
-                    b.Property<string>("User_Id")
+                    b.Property<Guid?>("User_Id")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Utilization_Comments")
                         .HasMaxLength(999)
@@ -1087,9 +1077,9 @@ namespace CorporatePortalApi.Migrations
                     b.Property<int>("Tenant_ID")
                         .HasColumnType("int");
 
-                    b.Property<string>("User_ID")
+                    b.Property<Guid?>("User_ID")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("Verification_Outcome_Lkp")
                         .HasColumnType("int");
@@ -1416,16 +1406,13 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Company_Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Company_Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Created_By")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1436,7 +1423,7 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Documentation_Fee")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric(9,4)");
 
                     b.Property<DateTime>("Effective_End_Date")
                         .HasColumnType("datetime2");
@@ -1454,7 +1441,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Last_Updated_By")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1465,7 +1451,7 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal?>("Max_Allowed_Loan_Limit")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,0)");
 
                     b.Property<int?>("Max_Sub_Product_Count")
                         .HasColumnType("int");
@@ -1483,18 +1469,16 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal?>("Processing_Fee")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric(9,4)");
 
                     b.Property<int?>("Product_Classification_Lkp")
                         .HasColumnType("int");
 
                     b.Property<string>("Product_Code")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Product_Description")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1516,17 +1500,15 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Service_Fee")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric(9,4)");
 
                     b.Property<string>("Shortlisting_Rules_Lookup")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Tenant_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("Workflow_Scheme_Code")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1705,9 +1687,10 @@ namespace CorporatePortalApi.Migrations
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_User", b =>
                 {
-                    b.Property<string>("User_ID")
+                    b.Property<Guid>("User_ID")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active_Flag")
                         .HasColumnType("bit");
@@ -1716,7 +1699,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Contact_Number")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -1738,22 +1720,18 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email_Address")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("First_Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Last_Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Last_Updated_By")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1764,33 +1742,28 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Middle_Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<bool?>("Mobile_User_Flag")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Parent_User_ID")
-                        .IsRequired()
+                    b.Property<Guid?>("Parent_User_ID")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("Primary_National_ID_Type_Lkp_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("Primary_National_Identifier_Value")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Server_Branch_ID")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Server_User_ID")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -1801,7 +1774,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("User_Image_URL")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -1861,17 +1833,15 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Last_Updated_By")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("Last_Updated_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("User_Id")
-                        .IsRequired()
+                    b.Property<Guid>("User_Id")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("User_To_Corporate_Mapping_Id");
 
@@ -2197,8 +2167,7 @@ namespace CorporatePortalApi.Migrations
                     b.HasOne("CorporatePortalApi.Models.TmX_User", "ParentUser")
                         .WithMany()
                         .HasForeignKey("Parent_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CorporatePortalApi.Models.TmX_Tenant", "Tenant")
                         .WithMany()

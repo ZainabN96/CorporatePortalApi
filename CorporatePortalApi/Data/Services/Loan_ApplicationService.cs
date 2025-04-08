@@ -51,8 +51,19 @@ namespace CorporatePortalApi.Data.Services
 
 		public async Task<IEnumerable<TmX_Loan_Application>> GetLoan_ApplicationAsync()
 		{
-			return await dc.TmX_Loan_Application.Where(x => x.Status ==  "IsActive")
+			return await dc.TmX_Loan_Application.Where(x => x.Status ==  "Active")
 									   .OrderBy(x => x.Loan_Application_ID)
+									   .Include(x => x.Currency)
+									   .Include(x => x.Order)
+											.ThenInclude(od => od.Institute)
+									   .Include(x => x.Company_Branch)
+									   .Include(x => x.Geofence)
+									   .Include(x => x.Product)
+											.ThenInclude(p => p.Bank)
+									   .Include(x => x.Customer_Master)
+											.ThenInclude(cm => cm.Transaction)
+									   .Include(x => x.User)
+									   .Include(x => x.Tenant)
 									   .ToListAsync();
 		}
 		public async Task<bool> IsLoan_ApplicationExist(string loan_appNo)

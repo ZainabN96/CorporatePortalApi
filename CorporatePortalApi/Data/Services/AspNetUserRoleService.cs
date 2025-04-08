@@ -20,32 +20,36 @@ namespace CorporatePortalApi.Data.Services
             return userRole;
         }
 
-        public async Task<AspNetUserRole> Get(int id)
+        public async Task<AspNetUser> GetWithUserId(int userId)
         {
-            return await dc.AspNetUserRoles.FindAsync(id);
-        }
-
-        public async Task<AspNetUserRole> GetWithUserId(int userId)
+			return await dc.AspNetUsers
+	              .Include(x => x.Address)
+	              .Include(x => x.Tenant)
+	              .Include(x => x.Locale)
+	              .Include(x => x.TimeZone)
+	              .Include(x => x.UserRoles)
+		              .ThenInclude(ur => ur.Role)
+				  .FirstOrDefaultAsync(x => x.Id == userId);
+		} 
+        public async Task<AspNetRole> GetWithRoleId(string roleId)
         {
-            return await dc.AspNetUserRoles.Where(x => x.UserId == userId)
-                                       .FirstOrDefaultAsync();
-        } 
-        public async Task<AspNetUserRole> GetWithRoleId(string roleId)
-        {
-            return await dc.AspNetUserRoles.Where(x => x.RoleId == roleId)
-                                       .FirstOrDefaultAsync();
+            return await dc.AspNetRole.Where(x => x.Id == roleId)
+				                        .Include(x => x.UserRoles)
+									   .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<AspNetUserRole>> GetAspNetUserRoleAsync()
         {
             return await dc.AspNetUserRoles
                                        .OrderBy(x => x.RoleId)
-                                       .ToListAsync();
+                                       .Include(x=> x.User)
+                                       .Include(x => x.Role)
+									   .ToListAsync();
         }
 
-        public async Task<bool> IsAspNetUserRoleExist(string roleId)
+        public async Task<bool> IsAspNetUserRoleExist(string roleId, int userId)
         {
-            return await dc.AspNetUserRoles.AnyAsync(x => x.RoleId == roleId);
+            return await dc.AspNetUserRoles.AnyAsync(x => x.RoleId == roleId && x.UserId == userId);
         }
 
       

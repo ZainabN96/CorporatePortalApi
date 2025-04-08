@@ -41,7 +41,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AspNetRole", (string)null);
+                    b.ToTable("AspNetRole");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.AspNetUser", b =>
@@ -104,7 +104,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PasswordHash")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -118,7 +117,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
@@ -151,7 +149,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Time_Zone_ID");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.AspNetUserRole", b =>
@@ -170,7 +168,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("AspNetUserRoles");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Account_Application", b =>
@@ -193,7 +191,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Account_Application_ID");
 
-                    b.ToTable("TmX_Account_Application", (string)null);
+                    b.ToTable("TmX_Account_Application");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Address", b =>
@@ -286,7 +284,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Tenant_ID");
 
-                    b.ToTable("TmX_Address", (string)null);
+                    b.ToTable("TmX_Address");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Address_Geography", b =>
@@ -345,7 +343,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Address_Geography_ID");
 
-                    b.ToTable("TmX_Address_Geography", (string)null);
+                    b.ToTable("TmX_Address_Geography");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Bank", b =>
@@ -439,7 +437,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Bank_ID");
 
-                    b.ToTable("TmX_Bank", (string)null);
+                    b.ToTable("TmX_Bank");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Company_Branch", b =>
@@ -467,7 +465,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Customer_Branch_Id");
 
-                    b.ToTable("TmX_Company_Branch", (string)null);
+                    b.ToTable("TmX_Company_Branch");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Corporate", b =>
@@ -482,11 +480,9 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Corporate_Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Corporate_Bank_Account")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -496,21 +492,17 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Corporate_Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Corporate_Email_Address")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Corporate_Image")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Corporate_NTN_Number")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -520,7 +512,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Corporate_URL")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -536,7 +527,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Last_Updated_By")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -547,7 +537,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Default_Product_Id");
 
-                    b.ToTable("TmX_Corporate", (string)null);
+                    b.ToTable("TmX_Corporate");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Currency", b =>
@@ -597,7 +587,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Currency_ID");
 
-                    b.ToTable("TmX_Currency", (string)null);
+                    b.ToTable("TmX_Currency");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Customer_Master", b =>
@@ -745,7 +735,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Transaction_Id");
 
-                    b.ToTable("TmX_Customer_Master", (string)null);
+                    b.ToTable("TmX_Customer_Master");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Geofence", b =>
@@ -766,7 +756,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Geofence_Id");
 
-                    b.ToTable("TmX_Geofence", (string)null);
+                    b.ToTable("TmX_Geofence");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Institute", b =>
@@ -787,7 +777,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Institute_ID");
 
-                    b.ToTable("TmX_Institute", (string)null);
+                    b.ToTable("TmX_Institute");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Loan_Application", b =>
@@ -984,9 +974,9 @@ namespace CorporatePortalApi.Migrations
                     b.Property<int?>("Type_Of_Screening_Lkp")
                         .HasColumnType("int");
 
-                    b.Property<string>("User_Id")
+                    b.Property<Guid?>("User_Id")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Utilization_Comments")
                         .HasMaxLength(999)
@@ -1010,7 +1000,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("User_Id");
 
-                    b.ToTable("TmX_Loan_Application", (string)null);
+                    b.ToTable("TmX_Loan_Application");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Loan_Application_Checklist", b =>
@@ -1084,9 +1074,9 @@ namespace CorporatePortalApi.Migrations
                     b.Property<int>("Tenant_ID")
                         .HasColumnType("int");
 
-                    b.Property<string>("User_ID")
+                    b.Property<Guid?>("User_ID")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("Verification_Outcome_Lkp")
                         .HasColumnType("int");
@@ -1110,7 +1100,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("User_ID");
 
-                    b.ToTable("TmX_Loan_Application_Checklist", (string)null);
+                    b.ToTable("TmX_Loan_Application_Checklist");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Locale", b =>
@@ -1138,7 +1128,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Locale_ID");
 
-                    b.ToTable("TmX_Locale", (string)null);
+                    b.ToTable("TmX_Locale");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Location", b =>
@@ -1199,7 +1189,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Tenant_ID");
 
-                    b.ToTable("TmX_Location", (string)null);
+                    b.ToTable("TmX_Location");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Lookup", b =>
@@ -1272,7 +1262,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Lookup_ID");
 
-                    b.ToTable("TmX_Lookup", (string)null);
+                    b.ToTable("TmX_Lookup");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Order", b =>
@@ -1392,7 +1382,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Tenant_ID");
 
-                    b.ToTable("TmX_Order", (string)null);
+                    b.ToTable("TmX_Order");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Product", b =>
@@ -1413,16 +1403,13 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Company_Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Company_Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Created_By")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1433,7 +1420,7 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Documentation_Fee")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric(9,4)");
 
                     b.Property<DateTime>("Effective_End_Date")
                         .HasColumnType("datetime2");
@@ -1451,7 +1438,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Last_Updated_By")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1462,7 +1448,7 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal?>("Max_Allowed_Loan_Limit")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,0)");
 
                     b.Property<int?>("Max_Sub_Product_Count")
                         .HasColumnType("int");
@@ -1480,18 +1466,16 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal?>("Processing_Fee")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric(9,4)");
 
                     b.Property<int?>("Product_Classification_Lkp")
                         .HasColumnType("int");
 
                     b.Property<string>("Product_Code")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Product_Description")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1513,17 +1497,15 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Service_Fee")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric(9,4)");
 
                     b.Property<string>("Shortlisting_Rules_Lookup")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Tenant_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("Workflow_Scheme_Code")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1535,7 +1517,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("Tenant_ID");
 
-                    b.ToTable("TmX_Product", (string)null);
+                    b.ToTable("TmX_Product");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Product_Checklist", b =>
@@ -1555,7 +1537,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Product_Checklist_Id");
 
-                    b.ToTable("TmX_Product_Checklist", (string)null);
+                    b.ToTable("TmX_Product_Checklist");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Tab", b =>
@@ -1576,7 +1558,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Tab_Id");
 
-                    b.ToTable("TmX_Tab", (string)null);
+                    b.ToTable("TmX_Tab");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Tenant", b =>
@@ -1627,7 +1609,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Tenant_ID");
 
-                    b.ToTable("TmX_Tenants", (string)null);
+                    b.ToTable("TmX_Tenants");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Time_Zone", b =>
@@ -1670,7 +1652,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Time_Zone_ID");
 
-                    b.ToTable("TmX_Time_Zone", (string)null);
+                    b.ToTable("TmX_Time_Zone");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_Transaction", b =>
@@ -1697,14 +1679,15 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasKey("Transaction_Id");
 
-                    b.ToTable("TmX_Transaction", (string)null);
+                    b.ToTable("TmX_Transaction");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_User", b =>
                 {
-                    b.Property<string>("User_ID")
+                    b.Property<Guid>("User_ID")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active_Flag")
                         .HasColumnType("bit");
@@ -1713,7 +1696,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Contact_Number")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -1735,22 +1717,18 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email_Address")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("First_Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Last_Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Last_Updated_By")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1761,33 +1739,28 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Middle_Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<bool?>("Mobile_User_Flag")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Parent_User_ID")
-                        .IsRequired()
+                    b.Property<Guid?>("Parent_User_ID")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("Primary_National_ID_Type_Lkp_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("Primary_National_Identifier_Value")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Server_Branch_ID")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Server_User_ID")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -1798,7 +1771,6 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("User_Image_URL")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -1826,7 +1798,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("User_Type_Lkp_ID");
 
-                    b.ToTable("TmX_User", (string)null);
+                    b.ToTable("TmX_User");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.TmX_User_To_Corporate_Mapping", b =>
@@ -1858,17 +1830,15 @@ namespace CorporatePortalApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Last_Updated_By")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("Last_Updated_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("User_Id")
-                        .IsRequired()
+                    b.Property<Guid>("User_Id")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("User_To_Corporate_Mapping_Id");
 
@@ -1876,7 +1846,7 @@ namespace CorporatePortalApi.Migrations
 
                     b.HasIndex("User_Id");
 
-                    b.ToTable("TmX_User_To_Corporate_Mapping", (string)null);
+                    b.ToTable("TmX_User_To_Corporate_Mapping");
                 });
 
             modelBuilder.Entity("CorporatePortalApi.Models.AspNetUser", b =>
@@ -2194,8 +2164,7 @@ namespace CorporatePortalApi.Migrations
                     b.HasOne("CorporatePortalApi.Models.TmX_User", "ParentUser")
                         .WithMany()
                         .HasForeignKey("Parent_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CorporatePortalApi.Models.TmX_Tenant", "Tenant")
                         .WithMany()

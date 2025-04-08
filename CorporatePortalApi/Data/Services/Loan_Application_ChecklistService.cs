@@ -28,6 +28,13 @@ namespace CorporatePortalApi.Data.Services
 		{
 			return await dc.TmX_Loan_Application_Checklist.Where(x => x.Active_Flag == true)
 									   .OrderBy(x => x.Loan_Application_Checklist_ID)
+									   .Include(x => x.Location)
+									   .Include(x => x.Account_Application)
+									   .Include(x => x.User)
+									   .Include(x => x.Tab)
+									   .Include(x => x.Loan_Application)
+									   .Include(x => x.Product_Checklist)
+									   .Include(x => x.Tenant)
 									   .ToListAsync();
 		}
 		public async Task<bool> IsLoan_App_ChecklistExist(int loan_checkId)

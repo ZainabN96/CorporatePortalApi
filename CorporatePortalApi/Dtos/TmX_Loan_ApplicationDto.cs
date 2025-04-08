@@ -15,7 +15,7 @@
 		public DateTime? Loan_Maturity_Date { get; set; }
 		public int? Total_Installments { get; set; }
 		public decimal? Installment_Amount { get; set; }
-		public string? User_Id { get; set; }
+		public Guid? User_Id { get; set; }
 		public int? Currency_Id { get; set; }
 		public decimal? Insurance_Premium_Amount { get; set; }
 		public decimal? Asset_Insurance_Premium_Amount { get; set; }

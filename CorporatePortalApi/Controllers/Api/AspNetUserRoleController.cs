@@ -22,20 +22,7 @@ namespace CorporatePortalApi.Controllers.Api
             this.mapper = mapper;
         }
 
-        [HttpGet("getbyId/{id}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            var entry = await uow.AspNetUserRolesService.Get(id);
-
-            if (entry == null)
-            {
-				return NotFound(ErrorCodes.NotFound());
-			}
-
-            return Ok(entry);
-        }
-
-        [HttpGet("getbyUserId/{userid}")]
+        [HttpGet("getbyUserId/{userId}")]
         public async Task<IActionResult> GetWithUserId(int userId)
         {
             var entry = await uow.AspNetUserRolesService.GetWithUserId(userId);
@@ -74,11 +61,11 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPost("addUserRole")]
         public async Task<IActionResult> Add(AspNetUserRoleDto userRoleDto)
         {
-            if (await uow.AspNetUserRolesService.IsAspNetUserRoleExist(userRoleDto.RoleId))
+            if (await uow.AspNetUserRolesService.IsAspNetUserRoleExist(userRoleDto.RoleId, userRoleDto.UserId))
             {
 				return BadRequest(ErrorCodes.BadRequestError(
 						"User Role already exists",
-						$"The User Role is already registered with ID {userRoleDto.RoleId}."
+						$"The User {userRoleDto.UserId} is already registered with Role {userRoleDto.RoleId}."
 				));
 			}
 

@@ -12,6 +12,6 @@ namespace CorporatePortalApi.Data.IServices
         Task<AspNetUser> GetWithName(string firstname, string lastname);
         Task<AspNetUser> GetWithTenantID(int tenantID);
         Task<IEnumerable<AspNetUser>> GetAspNetUserAsync();
-        Task<bool> IsUserExist(string Email);
+        Task<bool> IsUserExist(string Email, int id);
     }
 }

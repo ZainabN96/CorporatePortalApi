@@ -18,6 +18,7 @@ namespace CorporatePortalApi.Helper
                 cfg.CreateMap<TmX_Lookup, TmX_LookupDto>().ReverseMap();
                 cfg.CreateMap<TmX_Address_Geography, TmX_Address_GeographyDto>().ReverseMap();
                 cfg.CreateMap<AspNetRole, AspNetRoleDto>().ReverseMap();
+                cfg.CreateMap<AspNetUserRole, AspNetUserRoleDto>().ReverseMap();
                 cfg.CreateMap<AspNetUserDto, AspNetUser>()
                     .ForMember(dest => dest.Tenant_ID, opt => opt.MapFrom(src => src.TenantId));
                 cfg.CreateMap<AspNetUserDto, TmX_Address>()

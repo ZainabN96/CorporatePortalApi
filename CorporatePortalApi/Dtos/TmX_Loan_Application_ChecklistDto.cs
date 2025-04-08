@@ -18,7 +18,7 @@ namespace CorporatePortalApi.Dtos
 		public bool? Verification_Required { get; set; }
 		public int? Location_ID { get; set; }
 		public int? Account_Application_ID { get; set; }
-		public string? User_ID { get; set; }
+		public Guid? User_ID { get; set; }
 		public Guid? Mobile_ID { get; set; }
 		public int? Tab_ID { get; set; }
 		public int? Verification_Outcome_Lkp { get; set; }

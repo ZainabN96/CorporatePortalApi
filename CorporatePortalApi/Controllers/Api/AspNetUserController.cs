@@ -44,12 +44,11 @@ namespace CorporatePortalApi.Controllers.Api
 		[HttpPost("addUser")]
         public async Task<IActionResult> AddUser(AspNetUserDto userDto)
         {
-            // Check if the user already exists
-            if (await uow.AspNetUserService.IsUserExist(userDto.Email))
+            if (await uow.AspNetUserService.IsUserExist(userDto.Email, userDto.Id))
             {
 				return BadRequest(ErrorCodes.BadRequestError(
 						"NetUser already exists",
-						$"The email: '{userDto.Email}' is already registered."
+						$"The email: '{userDto.Email}' is already registered with ID {userDto.Id}."
 				));
 			}
 

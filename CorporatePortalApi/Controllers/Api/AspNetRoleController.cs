@@ -68,7 +68,7 @@ namespace CorporatePortalApi.Controllers.Api
 			{
 				return BadRequest(ErrorCodes.BadRequestError(
 						"Role already exists",
-						$"The role '{RoleDto.Name}' is already registered with ID {RoleDto.Id}."
+						$"The role '{RoleDto.Name}' is already registered."
 				));
 			}
 

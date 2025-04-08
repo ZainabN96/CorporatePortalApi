@@ -21,48 +21,7 @@ namespace CorporatePortalApi.Data.Services
 
             return users;
         }
-        /*public void AddUser(AspNetUser user, TmX_Address address)
-        {
-            // Add user to the database
-            user.Status = "Active";
-            dc.AspNetUsers.Add(user);
-
-            // Add address to the database
-            dc.TmX_Address.Add(address);
-        }*/
-        /*public void AddUser(AspNetUser user, TmX_Address address, TmX_Tenant tenant)
-        {
-            // Save the tenant first
-            tenant.Active_Flag = true;
-            tenant.Last_Updated_Date = DateTime.Now;
-            dc.TmX_Tenants.Add(tenant);
-            dc.SaveChanges();
-
-            // Validate Tenant_ID
-            if (tenant.Tenant_ID <= 0)
-                throw new Exception("Failed to generate Tenant_ID!");
-
-            // Assign the generated Tenant_ID to the address
-            address.Tenant_ID = tenant.Tenant_ID;
-            address.Active_Flag = true;
-
-            // Save the address
-            dc.TmX_Address.Add(address);
-            dc.SaveChanges();
-
-            // Validate Address_ID
-            if (address.Address_ID <= 0)
-                throw new Exception("Failed to generate Address_ID!");
-
-            // Assign the generated Address_ID to the user
-            user.Address_ID = address.Address_ID;
-            user.Status = "Active";
-
-            // Save the user
-            dc.AspNetUsers.Add(user);
-            dc.SaveChanges();
-        }*/
-
+       
         public void AddUser(AspNetUser user, TmX_Address address, TmX_Tenant tenant, TmX_Locale locale, TmX_Time_Zone time)
         {
             // Save the tenant
@@ -239,11 +198,17 @@ namespace CorporatePortalApi.Data.Services
         {
             return await dc.AspNetUsers.Where(x => x.Status == "Active")
                                        .OrderBy(x => x.Id)
-                                       .ToListAsync();
+									   .Include(x => x.Address)
+									   .Include(x => x.Tenant)
+									   .Include(x => x.Locale)
+									   .Include(x => x.TimeZone)
+									   .Include(x => x.UserRoles)
+										  .ThenInclude(ur => ur.Role)
+									   .ToListAsync();
         }
-        public async Task<bool> IsUserExist(string email)
+        public async Task<bool> IsUserExist(string email, int id)
         {
-            return await dc.AspNetUsers.AnyAsync(x => x.Email == email);
+            return await dc.AspNetUsers.AnyAsync(x => x.Id == id && x.Email == email);
         }
        
     }

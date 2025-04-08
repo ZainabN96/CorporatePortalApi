@@ -69,7 +69,7 @@ namespace CorporatePortalApi.Controllers.Api
 			{
 				return BadRequest(ErrorCodes.BadRequestError(
 						"Tenant already exists",
-						$"The Tenant '{TenantDto.Tenant_Name}' is already registered with ID {TenantDto.Tenant_ID}."
+						$"The Tenant '{TenantDto.Tenant_Name}' is already registered."
 				 ));
 			}
 

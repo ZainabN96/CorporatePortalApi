@@ -66,7 +66,7 @@ namespace CorporatePortalApi.Controllers.Api
 			{
 				return BadRequest(ErrorCodes.BadRequestError(
 						"Currency already exists",
-						$"The currency '{CurrencyDto.Currency_Symbol}' is already registered with ID {CurrencyDto.Currency_ID}."
+						$"The currency '{CurrencyDto.Currency_Symbol}' is already registered."
 				));
 			}
 

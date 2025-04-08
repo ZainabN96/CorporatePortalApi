@@ -34,7 +34,8 @@ namespace CorporatePortalApi.Data.Services
         {
             return await dc.TmX_Corporate.Where(x => x.Active_Flag == true )
                                        .OrderBy(x => x.Corporate_Name)
-                                       .ToListAsync();
+									   .Include(x => x.Default_Product)
+									   .ToListAsync();
         }
 
         public async Task<bool> IsCorporateExist(string name)

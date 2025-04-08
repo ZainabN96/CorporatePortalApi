@@ -72,7 +72,7 @@ namespace CorporatePortalApi.Controllers.Api
             {
 				return BadRequest(ErrorCodes.BadRequestError(
 						"Bank already exists",
-						$"The bank '{BankDto.Bank_Name}' is already registered with ID {BankDto.Bank_ID}."
+						$"The bank '{BankDto.Bank_Name}' is already registered."
 				 ));
 			}
 
@@ -94,15 +94,19 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPost("deleteBank")]
         public async Task<IActionResult> DeleteBank(DeleteKeyPairDto deleteKeyPairDto)
         {
-            var ProFromDb = await uow.BankService.Get(deleteKeyPairDto.Id);
+			if (deleteKeyPairDto.Id==0)
+			{
+				return BadRequest("Invalid integer ID provided.");
+			}
 
-            if (ProFromDb == null)
+			var bankFromDb = await uow.BankService.Get(deleteKeyPairDto.Id);
+			if (bankFromDb == null)
             {
 				return NotFound(ErrorCodes.NotFound());
 			}
 
-            ProFromDb.Is_Active = false;
-            ProFromDb.Last_Updated_Date = DateTime.Now;
+			bankFromDb.Is_Active = false;
+			bankFromDb.Last_Updated_Date = DateTime.Now;
 
             await uow.SaveAsync();
 

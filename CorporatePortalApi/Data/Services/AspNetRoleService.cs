@@ -32,7 +32,8 @@ namespace CorporatePortalApi.Data.Services
 		public async Task<IEnumerable<AspNetRole>> GetAllRoleAsync()
 		{
 			return await dc.AspNetRole.OrderBy(x => x.Name)
-									   .ToListAsync();
+									  .Include(x => x.UserRoles)
+									  .ToListAsync();
 		}
 
 		public async Task<bool> IsRoleExist(string name)

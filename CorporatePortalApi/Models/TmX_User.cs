@@ -7,10 +7,10 @@ namespace CorporatePortalApi.Models
     {
         [Key]
         [MaxLength(50)]
-        public string User_ID { get; set; }
+        public Guid User_ID { get; set; }
 
         [MaxLength(50)]
-        public string? Parent_User_ID { get; set; }
+        public Guid? Parent_User_ID { get; set; }
 
         [Required]
         public int Tenant_ID { get; set; }
