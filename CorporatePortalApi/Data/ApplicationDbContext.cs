@@ -43,6 +43,13 @@ namespace CorporatePortalApi.Data
 
 		public DbSet<TmX_Transaction> TmX_Transaction { get; set; }
 		public DbSet<TmX_Institute> TmX_Institute { get; set; }
+		public DbSet<TmX_Person> TmX_Person { get; set; }
+		public DbSet<TmX_Customer_Detail> TmX_Customer_Detail { get; set; }
+		public DbSet<TmX_Person_Income_Detail> TmX_Person_Income_Detail { get; set; }
+		public DbSet<TmX_Person_Expense_Detail> TmX_Person_Expense_Detail { get; set; }
+		public DbSet<TmX_Person_Address_Contact> TmX_Person_Address_Contact { get; set; }
+		public DbSet<TmX_Person_To_Address_Mapping> TmX_Person_To_Address_Mapping { get; set; }
+		public DbSet<TmX_Person_National_Identifier> TmX_Person_National_Identifier { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
