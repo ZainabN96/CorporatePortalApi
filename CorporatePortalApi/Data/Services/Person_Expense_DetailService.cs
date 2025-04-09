@@ -46,7 +46,7 @@ namespace CorporatePortalApi.Data.Services
 
 		public async Task<bool> IsPerson_Expense_DetailExistInUpdate(int personId, int id)
 		{
-			return await dc.TmX_Person_Expense_Detail.AnyAsync(x => x.Person_ID == personId && x.Person_ID != id);
+			return await dc.TmX_Person_Expense_Detail.AnyAsync(x => x.Person_ID == personId && x.Person_Expense_Detail_ID != id);
 		}
 	}
 }
