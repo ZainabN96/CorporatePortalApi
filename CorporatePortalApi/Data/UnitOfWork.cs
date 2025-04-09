@@ -33,6 +33,9 @@ namespace CorporatePortalApi
         public ITmX_Address_GeographyService TmX_Address_GeographyService => new TmX_Address_GeographyService(dc);    
 
         public ITmX_LookupService TmX_LookupService => new TmX_LookupService(dc);
+        public IPersonService PersonService => new PersonService(dc);
+        public IPerson_Income_DetailService Person_Income_DetailService => new Person_Income_DetailService(dc);
+        public IPerson_Expense_DetailService Person_Expense_DetailService => new Person_Expense_DetailService(dc);
 
         public async Task<bool> SaveAsync()
         {

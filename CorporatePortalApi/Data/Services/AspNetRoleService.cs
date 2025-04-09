@@ -33,6 +33,9 @@ namespace CorporatePortalApi.Data.Services
 		{
 			return await dc.AspNetRole.OrderBy(x => x.Name)
 									  .Include(x => x.UserRoles)
+										.ThenInclude(ur => ur.User)
+										.Include(x => x.UserRoles)
+			.ThenInclude(ur => ur.Role)
 									  .ToListAsync();
 		}
 

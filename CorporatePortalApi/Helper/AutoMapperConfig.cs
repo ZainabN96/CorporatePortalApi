@@ -35,6 +35,10 @@ namespace CorporatePortalApi.Helper
 				cfg.CreateMap<TmX_User, TmX_UserDto>().ReverseMap();
 				cfg.CreateMap<TmX_Loan_Application, TmX_Loan_ApplicationDto>().ReverseMap();
 				cfg.CreateMap<TmX_Loan_Application_Checklist, TmX_Loan_Application_ChecklistDto>().ReverseMap();
+				cfg.CreateMap<TmX_Person, TmX_PersonDto>().ReverseMap();
+				cfg.CreateMap<TmX_Person_Income_Detail, TmX_Person_Income_DetailDto>().ReverseMap();
+				cfg.CreateMap<TmX_Person_Expense_Detail, TmX_Person_Expense_DetailDto>().ReverseMap();
+
 			});
 
             return config.CreateMapper();

@@ -25,6 +25,9 @@ namespace CorporatePortalApi.Data.IServices
 		ILoan_ApplicationService Loan_ApplicationService { get; }
 		ILoan_Application_ChecklistService Loan_Application_ChecklistService { get; }
 
+		IPersonService PersonService { get; }
+		IPerson_Income_DetailService Person_Income_DetailService { get; }
+		IPerson_Expense_DetailService Person_Expense_DetailService { get; }
 		Task<bool> SaveAsync();
     }
 }
