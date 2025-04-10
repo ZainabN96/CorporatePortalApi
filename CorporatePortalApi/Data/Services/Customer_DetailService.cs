@@ -30,7 +30,11 @@ namespace CorporatePortalApi.Data.Services
         {
             return await dc.TmX_Customer_Detail.Where(x => x.Active_Flag == true)
                                       .OrderBy(x => x.National_Tax_Number)
-                                      .ToListAsync();
+									  .Include(x => x.Currency)
+									  .Include(x => x.Tenant)
+									  .Include(x => x.Person)
+									  .Include(x => x.CustomerMaster)
+									  .ToListAsync();
         }
 
         public async  Task<bool> IsCustomerDetailExist(string taxNo)

@@ -29,7 +29,9 @@ namespace CorporatePortalApi.Data.Services
             return await dc.TmX_Person_Address_Contact
                           .Where(x => x.Active_Flag == true)
                           .OrderBy(x => x.Person_Address_Contact_ID)
-                          .ToListAsync();
+						  .Include(x => x.PersonToAddressMapping)
+						  .Include(x => x.Tenant)
+						  .ToListAsync();
         }
 
         public async Task<bool> IsPersonAddressContactExist(string contactNumber)
