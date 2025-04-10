@@ -29,7 +29,10 @@ namespace CorporatePortalApi.Data.Services
         {
             return await dc.TmX_Person_National_Identifier.Where(x => x.Active_Flag == true)
                                       .OrderBy(x => x.Tenant_ID)
-                                      .ToListAsync();
+									  .Include(x => x.Order)
+									  .Include(x => x.Tenant)
+									  .Include(x => x.Person)
+									  .ToListAsync();
         }
 
         public async Task<bool> IsNationalIdentifierExist(int personId)
