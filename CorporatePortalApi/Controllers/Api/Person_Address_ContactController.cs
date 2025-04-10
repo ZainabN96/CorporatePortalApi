@@ -105,10 +105,7 @@ namespace CorporatePortalApi.Controllers.Api
             {
                 return NotFound(ErrorCodes.NotFound());
             }
-
-            PersonAddressContactFromDb.Active_Flag = false;
-            PersonAddressContactFromDb.Last_Updated_Date = DateTime.Now;
-
+			UHelper.SoftDelete(PersonAddressContactFromDb);
             await uow.SaveAsync();
 
             return Ok(deleteKeyPairDto);

@@ -28,14 +28,14 @@ namespace CorporatePortalApi.Data.Services
         public async Task<IEnumerable<TmX_Person_National_Identifier>> GetAllPersonNationalIdentifierAsync()
         {
             return await dc.TmX_Person_National_Identifier.Where(x => x.Active_Flag == true)
-                                      .OrderBy(x => x.Person_National_Identifier_ID)
+                                      .OrderBy(x => x.Tenant_ID)
                                       .ToListAsync();
         }
 
-        public async Task<bool> IsNationalIdentifierExist(int id)
+        public async Task<bool> IsNationalIdentifierExist(int personId)
         {
             return await dc.TmX_Person_National_Identifier
-                           .AnyAsync(x => x.Person_National_Identifier_ID == id);
+                           .AnyAsync(x => x.Person_ID == personId);
         }
 
         public async Task<bool> IsNationalIdentifierExistInUpdate(int personId, int id)

@@ -28,36 +28,22 @@ namespace CorporatePortalApi.Dtos
         public int? Relative_Political_Figure { get; set; }
         public int? Risk_Level { get; set; }
         public string? Sources_Of_Funds { get; set; }   
-
         public string? Expected_Cities_Txn { get; set; }
         public string? Expected_Countries_Txn { get; set; }
-        public string? Expected_Counter_Parties { get; set; }   
-
+        public string? Expected_Counter_Parties { get; set; }  
         public string? Branch_Comments { get; set; }
-
         public int Tenant_ID { get; set; } // Foreign Key   
         public string Created_By { get; set; } = string.Empty;
-
-
         public string? Last_Updated_By { get; set; }
-
-      
-
         public decimal? Customer_Total_Family_Income_Amount { get; set; }
-
         public decimal? Customer_Total_Family_Expense_Amount { get; set; }
-
         public int? Currency_ID { get; set; }
-
         public int? Person_ID { get; set; } //foreign key
-
         public decimal? Customer_Total_Self_Income_Amount { get; set; }
-
         public decimal? Customer_Total_Self_Expense_Amount { get; set; }
         public bool Active_Flag { get; set; }
         public DateTime Effective_Start_Date { get; set; }
         public DateTime Effective_End_Date { get; set; }
-
         public Guid? Mobile_ID { get; set; }
 
     }

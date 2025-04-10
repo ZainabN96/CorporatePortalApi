@@ -11,7 +11,7 @@ namespace CorporatePortalApi.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Customer_DetailController : ControllerBase
+    public class Customer_DetailController : Controller
     {
 
         private IUnitOfWork uow;
@@ -51,11 +51,11 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPost("addCustomerDetail")]
         public async Task<IActionResult> AddCustomerDetail(TmX_Customer_DetailDto customerDetailDto)
         {
-            if (await uow.Customer_DetailService.IsCustomerDetailExist(customerDetailDto.Customer_Detail_ID))
+            if (await uow.Customer_DetailService.IsCustomerDetailExist(customerDetailDto.National_Tax_Number))
             {
                 return BadRequest(ErrorCodes.BadRequestError(
                          "(Customer Detail already exists",
-                         $"The Customer '{customerDetailDto.Customer_Detail_ID}' is already registered."
+                         $"The Customer with Tax Number '{customerDetailDto.National_Tax_Number}' is already registered."
                   ));
             }
 
@@ -70,12 +70,12 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPut("updateCustomerDetail")]
         public async Task<IActionResult> UpdateCustomerDetail(TmX_Customer_DetailDto customerDetailDto)
         {
-            if (await uow.Customer_DetailService.IsCustomerDetailExistInUpdate(customerDetailDto.Customer_Detail_ID, customerDetailDto.Customer_Detail_ID))
+            if (await uow.Customer_DetailService.IsCustomerDetailExistInUpdate(customerDetailDto.National_Tax_Number, customerDetailDto.Customer_Detail_ID))
             {
                 
                 return BadRequest(ErrorCodes.BadRequestError(
-                        "customer Detail already exists",
-                        $"The customerDetail '{customerDetailDto.Customer_Detail_ID}' is already registered."
+                        "Customer Detail already exists",
+                        $"The Customer Detail with tax number '{customerDetailDto.National_Tax_Number}' is already registered."
                  ));
             }
 
@@ -107,10 +107,7 @@ namespace CorporatePortalApi.Controllers.Api
             {
                 return NotFound(ErrorCodes.NotFound());
             }
-
-            customerDetailFromDb.Active_Flag = false;
-            customerDetailFromDb.Last_Updated_Date = DateTime.Now;
-
+			UHelper.SoftDelete(customerDetailFromDb);
             await uow.SaveAsync();
 
             return Ok(deleteKeyPairDto);

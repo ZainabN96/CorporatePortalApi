@@ -51,11 +51,11 @@ namespace CorporatePortalApi.Controllers.Api
         [HttpPost("addPersonNationalIdentifier")]
         public async Task<IActionResult> AddPersonNationalIdentifier(TmX_Person_National_IdentifierDto PersonNationalIDto)
         {
-            if (await uow.Person_National_IdentifierService.IsNationalIdentifierExist(PersonNationalIDto.Person_National_Identifier_ID))
+            if (await uow.Person_National_IdentifierService.IsNationalIdentifierExist(PersonNationalIDto.Person_ID))
             {
                 return BadRequest(ErrorCodes.BadRequestError(
                          "Person National Identifier already exists",
-                         $"The Person National Identifier '{PersonNationalIDto.Person_National_Identifier_ID}' is already registered."
+                         $"The Person National Identifier with  person id '{PersonNationalIDto.Person_ID}' is already registered."
                   ));
             }
 
@@ -73,7 +73,7 @@ namespace CorporatePortalApi.Controllers.Api
             {
                 return BadRequest(ErrorCodes.BadRequestError(
                         "Person National Identifier already exists",
-                        $"The PersonNationalIdentifier '{PersonNationalIDto.Person_National_Identifier_ID}' is already registered."
+                        $"The Person National Identifier '{PersonNationalIDto.Person_ID}' is already registered."
                  ));
             }
 
@@ -105,9 +105,7 @@ namespace CorporatePortalApi.Controllers.Api
             {
                 return NotFound(ErrorCodes.NotFound());
             }
-
-            PersonNationalIFromDb.Active_Flag = false;
-            PersonNationalIFromDb.Last_Updated_Date = DateTime.Now;
+			UHelper.SoftDelete(PersonNationalIFromDb);
 
             await uow.SaveAsync();
 

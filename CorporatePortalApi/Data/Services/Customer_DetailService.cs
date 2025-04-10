@@ -29,18 +29,18 @@ namespace CorporatePortalApi.Data.Services
         public async Task<IEnumerable<TmX_Customer_Detail>> GetAllCustomerDetailAsync()
         {
             return await dc.TmX_Customer_Detail.Where(x => x.Active_Flag == true)
-                                      .OrderBy(x => x.Customer_Detail_ID)
+                                      .OrderBy(x => x.National_Tax_Number)
                                       .ToListAsync();
         }
 
-        public async  Task<bool> IsCustomerDetailExist(int customerDetailId)
+        public async  Task<bool> IsCustomerDetailExist(string taxNo)
         {
-            return await dc.TmX_Customer_Detail.AnyAsync(x => x.Customer_Detail_ID == customerDetailId);
+            return await dc.TmX_Customer_Detail.AnyAsync(x => x.National_Tax_Number == taxNo);
         }
 
-        public async Task<bool> IsCustomerDetailExistInUpdate(int customerDetailId, int id)
+        public async Task<bool> IsCustomerDetailExistInUpdate(string taxNo, int id)
         {
-            return await dc.TmX_Customer_Detail.AnyAsync(x => x.Customer_Detail_ID == customerDetailId && x.Customer_Detail_ID != id);
+            return await dc.TmX_Customer_Detail.AnyAsync(x => x.National_Tax_Number == taxNo && x.Customer_Detail_ID != id);
         }
     }
 }
