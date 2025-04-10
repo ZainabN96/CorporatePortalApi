@@ -20,6 +20,12 @@ namespace CorporatePortalApi.Data.IServices
         IAspNetRoleService AspNetRoleService { get; }
         ITmX_Address_GeographyService TmX_Address_GeographyService { get; }
 
+        ICustomer_DetailService Customer_DetailService { get; }
+
+        IPerson_National_IdentifierService Person_National_IdentifierService { get; }
+
+        IPerson_Address_ContactService Person_Address_ContactService { get; }
+
         ITmX_LookupService TmX_LookupService { get; }
 
 		ILoan_ApplicationService Loan_ApplicationService { get; }

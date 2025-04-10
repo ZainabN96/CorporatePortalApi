@@ -36,6 +36,11 @@ namespace CorporatePortalApi
         public IPersonService PersonService => new PersonService(dc);
         public IPerson_Income_DetailService Person_Income_DetailService => new Person_Income_DetailService(dc);
         public IPerson_Expense_DetailService Person_Expense_DetailService => new Person_Expense_DetailService(dc);
+        public ICustomer_DetailService Customer_DetailService => new Customer_DetailService(dc);
+
+        public IPerson_National_IdentifierService Person_National_IdentifierService => new Person_National_IdentifierService(dc);
+
+        public IPerson_Address_ContactService Person_Address_ContactService => new Person_Address_ContactService(dc);   
 
         public async Task<bool> SaveAsync()
         {
